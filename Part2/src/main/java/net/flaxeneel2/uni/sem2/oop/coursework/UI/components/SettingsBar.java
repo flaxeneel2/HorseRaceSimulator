@@ -23,7 +23,7 @@ public class SettingsBar extends JPanel {
         panel.add(new JLabel("Number of lanes: "));
         JComboBox<Integer> laneDropdown = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
         laneDropdown.addActionListener(e -> {
-            Main.UI_INSTANCE.getLanes().updateLanes();
+            Main.UI_INSTANCE.getLanes().updateLanes(laneDropdown.getSelectedIndex()+1);
         });
         laneDropdown.setEditable(true);
         laneDropdown.setSize(100, panel.getHeight());

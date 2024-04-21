@@ -11,5 +11,9 @@ Part 2 is the GUI version made using java swing.
 ### Part 1
 
 You can build the project using the following command:
-`mvn compile exec:java -f Part1/pom.xml`
+`mvn compile exec:java -pl Part1 -am`
 
+### Part 2
+
+You can build the project using the following command:
+`mvn compile exec:java -pl Part2 -am`
