@@ -4,6 +4,7 @@ import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class SettingsBar extends JPanel {
 
@@ -14,22 +15,17 @@ public class SettingsBar extends JPanel {
         this.add(this.getLaneDropdown());
         this.add(new JButton("bruh"));
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.setLayout(new GridLayout(1, 10));
-        this.add(new JLabel(""));
-        this.add(new JLabel(""));
-        this.add(new JLabel(""));
-        this.add(new JLabel(""));
-        this.add(new JLabel(""));
-        this.add(new JLabel(""));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
     }
 
     private JPanel getLaneDropdown() {
         JPanel panel = new JPanel();
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.setSize((int) (Main.UI_INSTANCE.getSize().width*0.2), panel.getHeight());
+        panel.setLayout(new FlowLayout());
+
         panel.add(new JLabel("Number of lanes:   "));
-        JComboBox<Integer> laneDropdown = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+        JComboBox<Integer> laneDropdown = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
         laneDropdown.addActionListener(e -> {
             Main.UI_INSTANCE.getLanes().updateLanes(laneDropdown.getSelectedIndex()+1);
         });
@@ -40,5 +36,8 @@ public class SettingsBar extends JPanel {
         laneDropdown.setEditable(true);
         panel.add(laneDropdown);
         return panel;
+    }
+    public void disableAllComponents() {
+        Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
     }
 }

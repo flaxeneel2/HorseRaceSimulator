@@ -1,6 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.HorseLanes;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.RaceData;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.SettingsBar;
 
 import javax.swing.*;
@@ -9,12 +10,13 @@ import java.util.ArrayList;
 
 public class RaceUI extends JFrame {
     private HorseLanes lanes;
+    private RaceData race;
     public RaceUI() {
         super("Horse Race simulator");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Horse simulator");
-        this.setSize(new Dimension(1920, 1080));
+        this.setSize(new Dimension(800, 600));
         this.setMinimumSize(new Dimension(800, 600));
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -54,6 +56,11 @@ public class RaceUI extends JFrame {
 
         this.lanes = new HorseLanes();
         this.add(this.lanes, constraints);
+
+
+        constraints.gridx = 1;
+        this.race = new RaceData();
+        this.add(this.race, constraints);
 
         this.setVisible(true);
     }
