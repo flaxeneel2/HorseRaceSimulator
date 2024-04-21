@@ -17,7 +17,6 @@ public class HorseLanes extends JPanel {
         this.setBackground(new Color(255, 255, 0));
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(((int) (Main.UI_INSTANCE.getSize().width*0.5)), Main.UI_INSTANCE.getSize().height-100));
     }
 
     public void updateLanes(int numLanes) {
@@ -33,5 +32,9 @@ public class HorseLanes extends JPanel {
             this.add(panel);
             this.lanes.add(panel);
         }
+    }
+
+    public void dealWithSizeChange(int newWidth, int newHeight) {
+        this.setPreferredSize(new Dimension((int) (newWidth*0.7), newHeight-100));
     }
 }

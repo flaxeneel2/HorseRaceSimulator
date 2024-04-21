@@ -6,6 +6,8 @@ import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.SettingsBar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 public class RaceUI extends JFrame {
@@ -19,13 +21,13 @@ public class RaceUI extends JFrame {
         this.setSize(new Dimension(800, 600));
         this.setMinimumSize(new Dimension(800, 600));
 
-        GridBagLayout gridBagLayout = new GridBagLayout();
+//        GridBagLayout gridBagLayout = new GridBagLayout();
+//
+//        gridBagLayout.columnWeights = new double[]{0.8, 0.2};
+//        gridBagLayout.rowWeights = new double[]{0.1, 0.9};
 
-        gridBagLayout.columnWeights = new double[]{0.8, 0.2};
-        gridBagLayout.rowWeights = new double[]{0.1, 0.9};
 
-
-        this.setLayout(gridBagLayout);
+        this.setLayout(new BorderLayout());
 
         this.getContentPane().setBackground(new Color(85, 85, 85));
 
@@ -33,34 +35,44 @@ public class RaceUI extends JFrame {
     }
 
     public void initialise() {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.anchor = GridBagConstraints.NORTH;
-        constraints.insets = new Insets(0,0,0,0);
+//        GridBagConstraints constraints = new GridBagConstraints();
+//        constraints.fill = GridBagConstraints.BOTH;
+//        constraints.anchor = GridBagConstraints.NORTH;
+//        constraints.insets = new Insets(0,0,0,0);
+//
+//        constraints.gridx = 0;
+//        constraints.gridwidth = 2;
+//        constraints.weightx = 0;
+//        constraints.gridy = 0;
 
-        constraints.gridx = 0;
-        constraints.gridwidth = 2;
-        constraints.weightx = 0;
-        constraints.gridy = 0;
+
+        this.add(new SettingsBar(), BorderLayout.NORTH);
 
 
-        this.add(new SettingsBar(), constraints);
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                System.out.printf("Resizing components. \tHeight:%s\tWidth:%s\n", RaceUI.super.getHeight(), RaceUI.super.getWidth());
+                lanes.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+                race.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+            }
+        });
 
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridwidth = 1;
-        constraints.gridy = 1;
-        constraints.weighty=0.1;
-        constraints.weightx = 1;
+//        constraints.fill = GridBagConstraints.BOTH;
+//        constraints.gridx = 0;
+//        constraints.gridwidth = 1;
+//        constraints.gridy = 1;
+//        constraints.weighty=0.1;
+//        constraints.weightx = 1;
 
 
         this.lanes = new HorseLanes();
-        this.add(this.lanes, constraints);
+        this.add(this.lanes, BorderLayout.WEST);
 
-
-        constraints.gridx = 1;
+//
+//        constraints.gridx = 1;
         this.race = new RaceData();
-        this.add(this.race, constraints);
+        this.add(this.race, BorderLayout.EAST);
 
         this.setVisible(true);
     }
