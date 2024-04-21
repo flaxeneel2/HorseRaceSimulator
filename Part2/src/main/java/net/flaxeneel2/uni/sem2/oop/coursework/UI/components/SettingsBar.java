@@ -1,6 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.SpritesDrawer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,18 @@ public class SettingsBar extends JPanel {
         Dimension panelDimensions = Main.UI_INSTANCE.getSize();
         this.setSize(new Dimension(panelDimensions.width, 50));
         this.add(this.getLaneDropdown());
+
         this.startButton = new JButton("Start");
         startButton.addActionListener(e -> Main.UI_INSTANCE.startRace());
         this.add(startButton);
+
+        JButton drawButton = new JButton("Draw a new horse");
+        drawButton.addActionListener(e -> {
+            new SpritesDrawer();
+        });
+
+        this.add(drawButton);
+
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
