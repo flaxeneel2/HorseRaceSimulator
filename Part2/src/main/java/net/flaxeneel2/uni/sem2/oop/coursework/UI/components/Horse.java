@@ -3,30 +3,35 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 import java.awt.*;
 
 public class Horse extends Canvas {
-    private int offset;
-    private int mult;
+    private int distanceTravelled;
     private int limit;
-    public Horse(int limit) {
+
+    private boolean fallen;
+    private double confidence;
+
+
+    public Horse(int limit, double confidence) {
         super();
         setBackground(Color.WHITE);
         setForeground(Color.RED);
-        this.offset = 0;
-        this.mult = 10;
+        this.distanceTravelled = 0;
+        this.confidence = confidence;
         this.limit = limit;
     }
 
     public void tick() {
-        int newOffset = offset + (mult);
-        if(newOffset > limit) {
-            newOffset = limit;
-            mult = -10;
-        } else if(newOffset < 0) {
+        if(this.fallen) return;
+        int newOffset = (int) (distanceTravelled + confidence*100);
+        if(newOffset < 0) {
             newOffset = 0;
-            mult = 10;
         }
-        offset = newOffset;
+        distanceTravelled = newOffset;
         this.paint(this.getGraphics());
+    }
 
+    public void fall() {
+        this.fallen = true;
+        setForeground(Color.BLUE);
     }
 
     public int getLimit() {
@@ -43,8 +48,9 @@ public class Horse extends Canvas {
     }
 
     public void paint(Graphics g) {
-        System.out.println(offset);
-        g.clearRect(offset-mult, 30, 100, 80);
-        g.fillRect(offset, 30,100, 80);
+        g.clearRect((int) (distanceTravelled -(confidence*100)), 30, 100, 80);
+        g.fillRect(distanceTravelled, 30,100, 80);
+
+
     }
 }

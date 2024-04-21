@@ -9,7 +9,7 @@ public class HorseLanes extends JPanel {
     private ArrayList<Horse> horses;
     public HorseLanes() {
         super();
-        Horse horse = new Horse(this.getWidth());
+        Horse horse = new Horse(this.getWidth(), 0.05);
         this.add(horse);
         this.horses = new ArrayList<>();
         this.horses.add(horse);
@@ -28,7 +28,7 @@ public class HorseLanes extends JPanel {
         this.repaint();
         Random random = new Random();
         for(int i = 0; i < numLanes; i++) {
-            Horse horse = new Horse(this.getWidth());
+            Horse horse = new Horse(this.getWidth(), 0.05);
             horse.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
             this.add(horse);
             this.horses.add(horse);
@@ -37,6 +37,9 @@ public class HorseLanes extends JPanel {
 
     public void dealWithSizeChange(int newWidth, int newHeight) {
         this.setPreferredSize(new Dimension((int) (newWidth*0.7), newHeight-100));
+        for(Horse horse : this.horses) {
+            horse.setLimit(this.getWidth());
+        }
     }
 
     public void readyAllHorses() {
