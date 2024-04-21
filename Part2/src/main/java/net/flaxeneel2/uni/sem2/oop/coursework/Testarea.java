@@ -2,88 +2,110 @@ package net.flaxeneel2.uni.sem2.oop.coursework;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.image.BufferStrategy;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Testarea extends JFrame {
-    private int pixelSize = 10;
-    private Color currentColor = Color.BLACK;
-    private JPanel canvas;
+    private DisplayGraphics canvas;
+    public static void main(String[] args) {
+        new Testarea();
+    }
+
 
     public Testarea() {
-        setTitle("Draw your horse");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        DisplayGraphics graphics = new DisplayGraphics(800);
+        this.canvas = graphics;
+        frame.add(graphics);
+        frame.setVisible(true);
+        this.startTicking();
+        canvas.startTicking();
 
-        canvas = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                int width = getWidth();
-                int height = getHeight();
-                for (int x = 0; x < width; x += pixelSize) {
-                    for (int y = 0; y < height; y += pixelSize) {
-                        g.setColor(Color.WHITE);
-                        g.fillRect(x, y, pixelSize, pixelSize);
-                        g.setColor(Color.BLACK);
-                        g.drawRect(x, y, pixelSize, pixelSize);
-                    }
-                }
-            }
-        };
-        canvas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                drawPixel(e);
-            }
-        });
-        canvas.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                drawPixel(e);
-            }
-        });
-
-        JPanel controlPanel = new JPanel();
-        JButton colorButton = new JButton("Choose Color");
-        colorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentColor = JColorChooser.showDialog(null, "Choose Color", currentColor);
-            }
-        });
-        JButton clearButton = new JButton("Clear Canvas");
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearCanvas();
-            }
-        });
-        controlPanel.add(colorButton);
-        controlPanel.add(clearButton);
-        controlPanel.add(new JButton("Save"));
-
-        setLayout(new BorderLayout());
-        add(canvas, BorderLayout.CENTER);
-        add(controlPanel, BorderLayout.SOUTH);
-
-        setVisible(true);
     }
 
-    private void drawPixel(MouseEvent e) {
-        int x = e.getX() / pixelSize * pixelSize;
-        int y = e.getY() / pixelSize * pixelSize;
-        Graphics g = canvas.getGraphics();
-        g.setColor(currentColor);
-        g.fillRect(x, y, pixelSize, pixelSize);
+    public void startTicking() {
+        Runnable r = this::tick;
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(r, 100, 6, TimeUnit.MILLISECONDS);
     }
 
-    private void clearCanvas() {
-        Graphics g = canvas.getGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    public void tick() {
+        this.canvas.tick();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(Testarea::new);
+
+
+}
+
+class DisplayGraphics extends Canvas {
+    private int offset;
+    private int mult;
+    private int limit;
+    public void paint(Graphics g) {
+        System.out.println(offset);
+        g.clearRect(offset-mult, 30, Math.abs(mult), 80);
+        g.fillRect(offset, 30,100, 80);
+
+
     }
+    public DisplayGraphics(int limit) {
+        setBackground(Color.WHITE);
+        setForeground(Color.RED);
+        this.offset = 0;
+        this.mult = 10;
+        this.limit = limit;
+
+
+
+    }
+
+    public boolean isReady() {
+        return this.getBufferStrategy() != null;
+    }
+
+    public void startTicking() {
+//        this.createBufferStrategy(3);
+//        BufferStrategy strat = this.getBufferStrategy();
+//        Graphics g = strat.getDrawGraphics();
+//        do {
+//            int newOffset = offset + (mult);
+//            if(newOffset > limit) {
+//                newOffset = limit;
+//                mult = -10;
+//            } else if(newOffset < 0) {
+//                newOffset = 0;
+//                mult = 10;
+//            }
+//            offset = newOffset;
+//
+//            try {
+//                System.out.println(offset);
+//                g.fillRect(offset, 30,100, 80);
+//
+//            } finally {
+//                g.dispose();
+//            }
+//            strat.show();
+//        } while (strat.contentsLost());
+    }
+
+    public void tick() {
+        int newOffset = offset + (mult);
+        if(newOffset > limit) {
+            newOffset = limit;
+            mult = -10;
+        } else if(newOffset < 0) {
+            newOffset = 0;
+            mult = 10;
+        }
+        offset = newOffset;
+        this.paint(this.getGraphics());
+
+    }
+
 }
