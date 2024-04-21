@@ -8,7 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RaceUI extends JFrame {
     private HorseLanes lanes;
@@ -41,6 +44,10 @@ public class RaceUI extends JFrame {
                 System.out.printf("Resizing components. \tHeight:%s\tWidth:%s\n", RaceUI.super.getHeight(), RaceUI.super.getWidth());
                 lanes.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
                 race.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+                lanes.revalidate();
+                lanes.repaint();
+                race.revalidate();
+                race.repaint();
             }
         });
 
@@ -52,10 +59,35 @@ public class RaceUI extends JFrame {
         this.add(this.race, BorderLayout.EAST);
 
         this.setVisible(true);
+
+        this.startTasks();
     }
 
     public HorseLanes getLanes() {
         return this.lanes;
+    }
+
+    public void startTasks() {
+//        AtomicInteger currHeight = new AtomicInteger(0);
+//        AtomicInteger currWidth = new AtomicInteger(0);
+//        Runnable task = () -> {
+//            int height = this.getHeight();
+//            int width = this.getWidth();
+//            if(width != currWidth.get() || height != currHeight.get()) {
+//                System.out.println("Redrawn");
+//                lanes.dealWithSizeChange(this.getWidth(), this.getHeight());
+//                race.dealWithSizeChange(this.getWidth(), this.getHeight());
+//                lanes.revalidate();
+//                lanes.repaint();
+//
+//                race.revalidate();
+//                race.repaint();
+//                currWidth.set(width);
+//                currHeight.set(height);
+//            }
+//        };
+//        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+//        executor.scheduleAtFixedRate(task, 200, 100, TimeUnit.MILLISECONDS);
     }
 
     public void setThemingDefaults() {
