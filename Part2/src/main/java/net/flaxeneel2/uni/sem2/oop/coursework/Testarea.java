@@ -31,7 +31,7 @@ public class Testarea extends JFrame {
     public void startTicking() {
         Runnable r = this::tick;
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(r, 100, 2, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(r, 100, 7, TimeUnit.MILLISECONDS);
     }
 
     public void tick() {
@@ -48,7 +48,7 @@ class DisplayGraphics extends Canvas {
     private int limit;
     public void paint(Graphics g) {
         System.out.println(offset);
-        g.clearRect(offset-mult, 30, Math.abs(mult), 80);
+        g.clearRect(offset-mult, 30, 100, 80);
         g.fillRect(offset, 30,100, 80);
 
 

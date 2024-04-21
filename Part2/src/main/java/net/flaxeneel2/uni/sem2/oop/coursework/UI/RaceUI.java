@@ -100,6 +100,10 @@ public class RaceUI extends JFrame {
 
     public void startRace() {
         this.settingsBar.disableAllComponents();
+        this.lanes.readyAllHorses();
+        for(int i = 0; i<1000; i++) {
+            this.lanes.tickAllHorses();
+        }
         Runnable r = () -> this.settingsBar.enableAllComponents();
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
