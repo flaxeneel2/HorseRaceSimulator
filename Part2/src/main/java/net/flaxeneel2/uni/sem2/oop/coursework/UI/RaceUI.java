@@ -16,7 +16,14 @@ public class RaceUI extends JFrame {
         this.setTitle("Horse simulator");
         this.setSize(new Dimension(1920, 1080));
         this.setMinimumSize(new Dimension(800, 600));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        GridBagLayout gridBagLayout = new GridBagLayout();
+
+        gridBagLayout.columnWeights = new double[]{0.8, 0.2};
+        gridBagLayout.rowWeights = new double[]{0.1, 0.9};
+
+
+        this.setLayout(gridBagLayout);
 
         this.getContentPane().setBackground(new Color(85, 85, 85));
 
@@ -24,10 +31,29 @@ public class RaceUI extends JFrame {
     }
 
     public void initialise() {
-        this.lanes = new HorseLanes();
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.insets = new Insets(0,0,0,0);
 
-        this.add(new SettingsBar(), BorderLayout.NORTH);
-        this.add(this.lanes, BorderLayout.WEST);
+        constraints.gridx = 0;
+        constraints.gridwidth = 2;
+        constraints.weightx = 0;
+        constraints.gridy = 0;
+
+
+        this.add(new SettingsBar(), constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridwidth = 1;
+        constraints.gridy = 1;
+        constraints.weighty=0.1;
+        constraints.weightx = 1;
+
+
+        this.lanes = new HorseLanes();
+        this.add(this.lanes, constraints);
 
         this.setVisible(true);
     }
