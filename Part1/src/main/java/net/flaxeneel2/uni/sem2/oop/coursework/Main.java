@@ -3,10 +3,9 @@ package net.flaxeneel2.uni.sem2.oop.coursework;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.RaceUI;
 
 public class Main {
-    public static RaceUI UI_INSTANCE;
+    
     public static void main(String[] args) {
-        UI_INSTANCE = new RaceUI();
-        UI_INSTANCE.initialise();
+        testRace()
     }
 
 
