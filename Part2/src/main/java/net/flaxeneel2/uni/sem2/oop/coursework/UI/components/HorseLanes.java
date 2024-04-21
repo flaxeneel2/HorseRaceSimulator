@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class HorseLanes extends JPanel {
-    private ArrayList<JPanel> lanes;
+    private ArrayList<Canvas> lanes;
     public HorseLanes() {
         super();
         this.lanes = new ArrayList<>();
@@ -27,7 +27,7 @@ public class HorseLanes extends JPanel {
         this.repaint();
         Random random = new Random();
         for(int i = 0; i < numLanes; i++) {
-            JPanel panel = new JPanel();
+            Canvas panel = new Canvas();
             panel.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
             this.add(panel);
             this.lanes.add(panel);

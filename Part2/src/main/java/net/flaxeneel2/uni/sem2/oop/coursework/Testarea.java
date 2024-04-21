@@ -31,7 +31,7 @@ public class Testarea extends JFrame {
     public void startTicking() {
         Runnable r = this::tick;
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(r, 100, 6, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(r, 100, 2, TimeUnit.MILLISECONDS);
     }
 
     public void tick() {
