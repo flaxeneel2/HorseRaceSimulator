@@ -1,11 +1,10 @@
 package net.flaxeneel2.uni.sem2.oop.coursework;
 
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.RaceUI;
 
 public class Main {
     
     public static void main(String[] args) {
-        testRace()
+        testRace();
     }
 
 
