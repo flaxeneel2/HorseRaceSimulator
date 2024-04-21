@@ -8,12 +8,16 @@ import java.util.Arrays;
 
 public class SettingsBar extends JPanel {
 
+    private JButton startButton;
+
     public SettingsBar() {
         super();
         Dimension panelDimensions = Main.UI_INSTANCE.getSize();
         this.setSize(new Dimension(panelDimensions.width, 50));
         this.add(this.getLaneDropdown());
-        this.add(new JButton("bruh"));
+        this.startButton = new JButton("Start");
+        startButton.addActionListener(e -> Main.UI_INSTANCE.startRace());
+        this.add(startButton);
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -38,6 +42,11 @@ public class SettingsBar extends JPanel {
         return panel;
     }
     public void disableAllComponents() {
+        startButton.setText("Race ongoing...");
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
+    }
+    public void enableAllComponents() {
+        Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
+        startButton.setText("Start");
     }
 }

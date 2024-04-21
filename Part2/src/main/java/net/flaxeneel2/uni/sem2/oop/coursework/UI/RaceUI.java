@@ -11,11 +11,11 @@ import java.awt.event.ComponentEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class RaceUI extends JFrame {
     private HorseLanes lanes;
     private RaceData race;
+    private SettingsBar settingsBar;
     public RaceUI() {
         super("Horse Race simulator");
 
@@ -34,8 +34,8 @@ public class RaceUI extends JFrame {
 
     public void initialise() {
 
-
-        this.add(new SettingsBar(), BorderLayout.NORTH);
+        this.settingsBar = new SettingsBar();
+        this.add(settingsBar, BorderLayout.NORTH);
 
 
         this.addComponentListener(new ComponentAdapter() {
@@ -60,35 +60,13 @@ public class RaceUI extends JFrame {
 
         this.setVisible(true);
 
-        this.startTasks();
     }
 
     public HorseLanes getLanes() {
         return this.lanes;
     }
 
-    public void startTasks() {
-//        AtomicInteger currHeight = new AtomicInteger(0);
-//        AtomicInteger currWidth = new AtomicInteger(0);
-//        Runnable task = () -> {
-//            int height = this.getHeight();
-//            int width = this.getWidth();
-//            if(width != currWidth.get() || height != currHeight.get()) {
-//                System.out.println("Redrawn");
-//                lanes.dealWithSizeChange(this.getWidth(), this.getHeight());
-//                race.dealWithSizeChange(this.getWidth(), this.getHeight());
-//                lanes.revalidate();
-//                lanes.repaint();
-//
-//                race.revalidate();
-//                race.repaint();
-//                currWidth.set(width);
-//                currHeight.set(height);
-//            }
-//        };
-//        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-//        executor.scheduleAtFixedRate(task, 200, 100, TimeUnit.MILLISECONDS);
-    }
+
 
     public void setThemingDefaults() {
 
@@ -97,6 +75,7 @@ public class RaceUI extends JFrame {
 
         UIManager.put("Label.background", new Color(34, 34, 34));
         UIManager.put("Label.foreground", new Color(255, 255, 255));
+        UIManager.put("Label.disabledForeground", new Color(100, 100, 100));
 
         UIManager.put("ComboBox.background", new Color(34, 34, 34));
         UIManager.put("ComboBox.foreground", new Color(255, 255, 255));
@@ -113,5 +92,17 @@ public class RaceUI extends JFrame {
         UIManager.put("TextField.background", new Color(34, 34, 34));
         UIManager.put("TextField.foreground", new Color(255, 255, 255));
 
+
+
+    }
+
+
+
+    public void startRace() {
+        this.settingsBar.disableAllComponents();
+        Runnable r = () -> this.settingsBar.enableAllComponents();
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+        executorService.schedule(r, 5, TimeUnit.SECONDS);
     }
 }
