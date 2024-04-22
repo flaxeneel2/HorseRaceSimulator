@@ -21,4 +21,7 @@ public class HorsesStore {
     public Horse removeHorse(Horse horse) {
         return horses.remove(horse.getName());
     }
+    public Horse[] getAllHorses() {
+        return horses.values().toArray(new Horse[0]);
+    }
 }

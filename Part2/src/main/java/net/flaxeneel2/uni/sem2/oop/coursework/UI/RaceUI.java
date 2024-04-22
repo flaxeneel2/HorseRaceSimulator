@@ -91,6 +91,7 @@ public class RaceUI extends JFrame {
 
         UIManager.put("TextField.background", new Color(34, 34, 34));
         UIManager.put("TextField.foreground", new Color(255, 255, 255));
+        UIManager.put("TextField.caretForeground" , Color.WHITE);
 
 
 
