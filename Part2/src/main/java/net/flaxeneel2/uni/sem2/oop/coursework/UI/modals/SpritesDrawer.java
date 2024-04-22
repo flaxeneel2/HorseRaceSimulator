@@ -10,13 +10,19 @@ public class SpritesDrawer extends JFrame {
     private JPanel canvas;
     private Color[][] pixelsDrawn;
 
-    public SpritesDrawer() {
+    public SpritesDrawer(CreateHorse parentFrame) {
+        this(parentFrame, null);
+    }
+
+    public SpritesDrawer(CreateHorse parentFrame, Color[][] canvasState) {
         setTitle("Draw your horse");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        pixelsDrawn = new Color[getWidth()/pixelSize * pixelSize][getHeight()/pixelSize * pixelSize];
+        pixelsDrawn = canvasState;
+        boolean fresh = canvasState == null;
+        if(pixelsDrawn == null) pixelsDrawn = new Color[getWidth()/pixelSize * pixelSize][getHeight()/pixelSize * pixelSize];
 
         canvas = new JPanel() {
             @Override
@@ -26,8 +32,12 @@ public class SpritesDrawer extends JFrame {
                 int height = getHeight();
                 for (int x = 0; x < width; x += pixelSize) {
                     for (int y = 0; y < height; y += pixelSize) {
-                        pixelsDrawn[x][y] = new Color(255,255,255);
-                        g.setColor(Color.WHITE);
+                        if(fresh) {
+                            pixelsDrawn[x][y] = new Color(255,255,255);
+                            g.setColor(Color.WHITE);
+                        } else {
+                            g.setColor(pixelsDrawn[x][y]);
+                        }
                         g.fillRect(x, y, pixelSize, pixelSize);
                         g.setColor(Color.BLACK);
                         g.drawRect(x, y, pixelSize, pixelSize);
@@ -59,7 +69,10 @@ public class SpritesDrawer extends JFrame {
         controlPanel.add(colorButton);
         controlPanel.add(clearButton);
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(e -> this.dispose());
+        saveButton.addActionListener(e -> {
+            parentFrame.setCanvasState(this.pixelsDrawn);
+            this.dispose();
+        });
         controlPanel.add(saveButton);
 
 
