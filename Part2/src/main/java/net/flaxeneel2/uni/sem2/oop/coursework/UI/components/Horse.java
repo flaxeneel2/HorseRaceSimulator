@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Horse extends Canvas {
     private int distanceTravelled;
+    private int distanceTravelledLastFrame;
     private int limit;
 
     private boolean fallen;
@@ -18,12 +19,14 @@ public class Horse extends Canvas {
         setBackground(Color.WHITE);
         setForeground(Color.RED);
         this.distanceTravelled = 0;
+        this.distanceTravelledLastFrame = 0;
         this.horseData = horseData;
         this.limit = limit;
     }
 
     public void tick() {
         if(this.fallen) return;
+        distanceTravelledLastFrame = distanceTravelled;
         int newOffset = (int) (distanceTravelled + horseData.getConfidence()*100);
         if(newOffset < 0) {
             newOffset = 0;
@@ -46,12 +49,13 @@ public class Horse extends Canvas {
     }
 
     public void getReady() {
-        Graphics g = this.getGraphics();
-        g.fillRect(0, 15, 30, 30);
+        this.distanceTravelled = 0;
+        this.fallen = false;
+        this.distanceTravelledLastFrame = 0;
     }
 
     public void paint(Graphics g) {
-        g.clearRect((int) (distanceTravelled -(horseData.getConfidence()*100)), 30, 100, 80);
+        g.clearRect(distanceTravelledLastFrame, 30, distanceTravelled -distanceTravelledLastFrame, 100);
         int xOffset = 0;
         int yOffset  = 0;
         for(Color[] row : this.horseData.getSprite()) {
