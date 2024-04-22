@@ -37,7 +37,13 @@ public class ViewHorses extends JFrame {
         this.addEntries(new ArrayList<>(Arrays.asList(STORAGE.getAllHorses())));
     }
 
-    public void addEntry(Horse horse) {
+    public void addEntry(HorseData horse) {
+        JPanel horsePanel = new JPanel();
+        horsePanel.setLayout(new GridLayout(1, 2));
+
+        horsePanel.setBackground(new Color(54,54,54));
+        horsePanel.setPreferredSize(new Dimension(this.getWidth(), 50));
+
 
     }
 

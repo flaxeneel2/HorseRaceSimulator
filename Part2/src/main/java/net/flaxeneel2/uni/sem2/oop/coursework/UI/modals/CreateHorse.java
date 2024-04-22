@@ -1,13 +1,17 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.STORAGE;
 
 public class CreateHorse extends JFrame {
 
-    private Color[][] canvasState;
+    private Color[][] sprite;
 
     private JButton editButton;
 
@@ -47,7 +51,8 @@ public class CreateHorse extends JFrame {
         JPanel breedsContainer = new JPanel();
         breedsContainer.setPreferredSize(new Dimension(this.getWidth()-20, 25));
         breedsContainer.setLayout(new BorderLayout());
-        JComboBox<String> breeds = new JComboBox<>(new String[]{"Thoroughbred",
+        JComboBox<String> breeds = new JComboBox<>(new String[]{
+                "Thoroughbred",
                 "Arabian",
                 "Quarter Horse",
                 "Appaloosa",
@@ -56,7 +61,8 @@ public class CreateHorse extends JFrame {
                 "Tennessee Walking Horse",
                 "Andalusian",
                 "Friesian",
-                "Clydesdale"});
+                "Clydesdale"
+        });
         breeds.setPreferredSize(new Dimension(this.getWidth()/2, 25));
         breedsContainer.add(new JLabel("Breed:"), BorderLayout.WEST);
         breedsContainer.add(breeds, BorderLayout.EAST);
@@ -69,8 +75,21 @@ public class CreateHorse extends JFrame {
         nameInputContainer.setPreferredSize(new Dimension(this.getWidth()-20, 25));
         JLabel nameLabel = new JLabel("Name:");
         JTextField nameInput = new JTextField();
-        nameInput.addActionListener(e -> {
-            name = nameInput.getText();
+        nameInput.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                name = nameInput.getText();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                name = nameInput.getText();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                name = nameInput.getText();
+            }
         });
         nameInput.setPreferredSize(new Dimension(this.getWidth()/2, 25));
         nameInputContainer.add(nameLabel, BorderLayout.WEST);
@@ -88,7 +107,7 @@ public class CreateHorse extends JFrame {
         });
         this.editButton = new JButton("Edit existing horse");
         this.editButton.addActionListener(e -> {
-            new SpritesDrawer(this, canvasState);
+            new SpritesDrawer(this, sprite);
         });
         this.editButton.setEnabled(false);
         optionsPanel.add(drawButton);
@@ -96,9 +115,9 @@ public class CreateHorse extends JFrame {
         this.add(optionsPanel);
     }
 
-    public void setCanvasState(Color[][] canvasState) {
+    public void setSprite(Color[][] sprite) {
         this.editButton.setEnabled(true);
-        this.canvasState = canvasState;
+        this.sprite = sprite;
     }
 
     private void addCancelSaveButtons() {
@@ -107,11 +126,16 @@ public class CreateHorse extends JFrame {
         cancelSaveButtonsContainer.setPreferredSize(new Dimension(this.getWidth(), 25));
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(e -> {});
+        cancelButton.addActionListener(e -> {
+            this.dispose();
+        });
         cancelButton.setBackground(new Color(124, 45, 45, 255));
 
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(e -> {});
+        saveButton.addActionListener(e -> {
+            this.saveHorseToStore();
+            this.dispose();
+        });
         saveButton.setBackground(new Color(0, 84, 0, 255));
 
         cancelSaveButtonsContainer.add(cancelButton);
@@ -139,6 +163,7 @@ public class CreateHorse extends JFrame {
 
 
     public void saveHorseToStore() {
-        STORAGE.addHorse(null);
+        HorseData horseData = new HorseData(name, breed, confidence, sprite);
+        STORAGE.addHorse(horseData);
     }
 }

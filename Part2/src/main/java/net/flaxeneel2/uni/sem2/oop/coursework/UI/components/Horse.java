@@ -52,7 +52,17 @@ public class Horse extends Canvas {
 
     public void paint(Graphics g) {
         g.clearRect((int) (distanceTravelled -(horseData.getConfidence()*100)), 30, 100, 80);
-        g.fillRect(distanceTravelled, 30,100, 80);
+        int xOffset = 0;
+        int yOffset = 0;
+        for(Color[] row : this.horseData.getSprite()) {
+            for(Color c : row) {
+                g.setColor(c);
+                g.fillRect(distanceTravelled+xOffset, 30+yOffset,10, 10);
+                xOffset+=10;
+            }
+            xOffset=0;
+            yOffset+=10;
+        }
 
     }
 }

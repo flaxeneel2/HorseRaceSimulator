@@ -10,6 +10,7 @@ public class HorsesStore {
         horses = new HashMap<>();
     }
     public void addHorse(HorseData horse) {
+        System.out.printf("Horse named %s saved to persistent store.%n", horse.getName());
         horses.put(horse.getName(), horse);
     }
     public HorseData getHorse(String name) {

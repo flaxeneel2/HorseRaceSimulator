@@ -70,7 +70,7 @@ public class SpritesDrawer extends JFrame {
         controlPanel.add(clearButton);
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
-            parentFrame.setCanvasState(this.pixelsDrawn);
+            parentFrame.setSprite(this.pixelsDrawn);
             this.dispose();
         });
         controlPanel.add(saveButton);
