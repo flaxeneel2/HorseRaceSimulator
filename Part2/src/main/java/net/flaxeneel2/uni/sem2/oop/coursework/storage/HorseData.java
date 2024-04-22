@@ -7,11 +7,12 @@ public class HorseData {
     private String breed;
     private Color[][] sprite;
     private double confidence;
-    public HorseData(String name, String breed, double confidence, Color[][] confidence) {
+    public HorseData(String name, String breed, double confidence, Color[][] sprite) {
         super();
         this.name = name;
         this.breed = breed;
         this.confidence = confidence;
+        this.sprite = sprite;
     }
 
     public String getName() {

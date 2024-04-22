@@ -1,6 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,7 @@ public class ViewHorses extends JFrame {
 
     }
 
-    public void addEntries(ArrayList<Horse> horses) {
+    public void addEntries(ArrayList<HorseData> horses) {
         //Arrays.stream(this.horsesList.getComponents()).forEach(Component::di)
     }
 }
