@@ -1,7 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.SpritesDrawer;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorses;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,12 +21,11 @@ public class SettingsBar extends JPanel {
         startButton.addActionListener(e -> Main.UI_INSTANCE.startRace());
         this.add(startButton);
 
-        JButton drawButton = new JButton("Draw a new horse");
-        drawButton.addActionListener(e -> {
-            new SpritesDrawer();
+        JButton viewHorses = new JButton("View horses");
+        viewHorses.addActionListener(e -> {
+            new ViewHorses();
         });
-
-        this.add(drawButton);
+        this.add(viewHorses);
 
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));

@@ -1,4 +1,4 @@
-package net.flaxeneel2.uni.sem2.oop.coursework.UI;
+package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +12,11 @@ public class SpritesDrawer extends JFrame {
 
     public SpritesDrawer() {
         setTitle("Draw your horse");
-        setSize(400, 440);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+
+        pixelsDrawn = new Color[getWidth()/pixelSize * pixelSize][getHeight()/pixelSize * pixelSize];
 
         canvas = new JPanel() {
             @Override
@@ -34,7 +36,7 @@ public class SpritesDrawer extends JFrame {
             }
         };
 
-        pixelsDrawn = new Color[getWidth()/pixelSize][getHeight()/pixelSize];
+
 
         canvas.addMouseListener(new MouseAdapter() {
             @Override
@@ -69,6 +71,7 @@ public class SpritesDrawer extends JFrame {
     }
 
     private void drawPixel(MouseEvent e) {
+        if(e.getX() >= getWidth() || e.getY() >= getHeight()) return;
         int x = e.getX() / pixelSize * pixelSize;
         int y = e.getY() / pixelSize * pixelSize;
         pixelsDrawn[x][y] = currentColor;
