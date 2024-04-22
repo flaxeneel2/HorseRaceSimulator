@@ -5,23 +5,23 @@ import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
 import java.util.HashMap;
 
 public class HorsesStore {
-    private HashMap<String, Horse> horses;
+    private HashMap<String, HorseData> horses;
     public HorsesStore() {
         horses = new HashMap<>();
     }
-    public void addHorse(Horse horse) {
+    public void addHorse(HorseData horse) {
         horses.put(horse.getName(), horse);
     }
-    public Horse getHorse(String name) {
+    public HorseData getHorse(String name) {
         return horses.get(name);
     }
-    public Horse removeHorse(String name) {
+    public HorseData removeHorse(String name) {
         return horses.remove(name);
     }
-    public Horse removeHorse(Horse horse) {
+    public HorseData removeHorse(HorseData horse) {
         return horses.remove(horse.getName());
     }
-    public Horse[] getAllHorses() {
-        return horses.values().toArray(new Horse[0]);
+    public HorseData[] getAllHorses() {
+        return horses.values().toArray(new HorseData[0]);
     }
 }

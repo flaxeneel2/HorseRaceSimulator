@@ -1,5 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
+
 import java.awt.*;
 
 public class Horse extends Canvas {
@@ -7,21 +9,22 @@ public class Horse extends Canvas {
     private int limit;
 
     private boolean fallen;
-    private double confidence;
+
+    private HorseData horseData;
 
 
-    public Horse(int limit, double confidence) {
+    public Horse(int limit, HorseData horseData) {
         super();
         setBackground(Color.WHITE);
         setForeground(Color.RED);
         this.distanceTravelled = 0;
-        this.confidence = confidence;
+        this.horseData = horseData;
         this.limit = limit;
     }
 
     public void tick() {
         if(this.fallen) return;
-        int newOffset = (int) (distanceTravelled + confidence*100);
+        int newOffset = (int) (distanceTravelled + horseData.getConfidence()*100);
         if(newOffset < 0) {
             newOffset = 0;
         }
@@ -48,9 +51,8 @@ public class Horse extends Canvas {
     }
 
     public void paint(Graphics g) {
-        g.clearRect((int) (distanceTravelled -(confidence*100)), 30, 100, 80);
+        g.clearRect((int) (distanceTravelled -(horseData.getConfidence()*100)), 30, 100, 80);
         g.fillRect(distanceTravelled, 30,100, 80);
-
 
     }
 }
