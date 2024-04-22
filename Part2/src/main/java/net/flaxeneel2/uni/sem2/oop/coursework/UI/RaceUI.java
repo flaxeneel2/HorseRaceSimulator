@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RaceUI extends JFrame {
     private HorseLanes lanes;
-    private HorseStatus race;
+    private HorseStatus raceStatus;
     private SettingsBar settingsBar;
     public RaceUI() {
         super("Horse Race simulator");
@@ -43,11 +43,11 @@ public class RaceUI extends JFrame {
             public void componentResized(ComponentEvent e) {
                 System.out.printf("Resizing components. \tHeight:%s\tWidth:%s\n", RaceUI.super.getHeight(), RaceUI.super.getWidth());
                 lanes.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
-                race.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+                raceStatus.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
                 lanes.revalidate();
                 lanes.repaint();
-                race.revalidate();
-                race.repaint();
+                raceStatus.revalidate();
+                raceStatus.repaint();
             }
         });
 
@@ -55,8 +55,8 @@ public class RaceUI extends JFrame {
         this.lanes = new HorseLanes();
         this.add(this.lanes, BorderLayout.WEST);
 
-        this.race = new HorseStatus();
-        this.add(this.race, BorderLayout.EAST);
+        this.raceStatus = new HorseStatus();
+        this.add(this.raceStatus, BorderLayout.EAST);
 
         this.setVisible(true);
 
@@ -101,7 +101,9 @@ public class RaceUI extends JFrame {
 
     }
 
-
+    public HorseStatus getRaceStatus() {
+        return raceStatus;
+    }
 
     public void startRace() {
         this.settingsBar.disableAllComponents();

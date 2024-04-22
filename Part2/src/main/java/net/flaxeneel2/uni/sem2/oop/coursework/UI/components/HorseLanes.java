@@ -1,5 +1,6 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
@@ -26,14 +27,18 @@ public class HorseLanes extends JPanel {
         this.removeAll();
         this.revalidate();
         this.repaint();
-        //TODO: introduce a random system for when the users dont select horses.
+
+        ArrayList<HorseData> data = new ArrayList<>();
         Random random = new Random();
         for(int i = 0; i < numLanes; i++) {
-            Horse horse = new Horse(this.getWidth(), HorseData.random());
+            HorseData horseData = HorseData.random();
+            Horse horse = new Horse(this.getWidth(), horseData);
             horse.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
             this.add(horse);
             this.horses.add(horse);
+            data.add(horseData);
         }
+        Main.UI_INSTANCE.getRaceStatus().updateLanes(data);
     }
 
     public void dealWithSizeChange(int newWidth, int newHeight) {
