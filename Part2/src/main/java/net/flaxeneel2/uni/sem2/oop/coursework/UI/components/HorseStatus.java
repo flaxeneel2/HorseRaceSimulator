@@ -5,8 +5,8 @@ import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import javax.swing.*;
 import java.awt.*;
 
-public class RaceData extends JPanel {
-    public RaceData() {
+public class HorseStatus extends JPanel {
+    public HorseStatus() {
         super(new FlowLayout(FlowLayout.LEFT));
         this.setBackground(Color.BLUE);
         this.setPreferredSize(new Dimension((int) (Main.UI_INSTANCE.getSize().width*0.3), Main.UI_INSTANCE.getHeight()-100));

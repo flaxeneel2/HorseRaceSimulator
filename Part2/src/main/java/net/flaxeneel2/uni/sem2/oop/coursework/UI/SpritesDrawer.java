@@ -8,11 +8,13 @@ public class SpritesDrawer extends JFrame {
     private int pixelSize = 10;
     private Color currentColor = Color.BLACK;
     private JPanel canvas;
+    private Color[][] pixelsDrawn;
 
     public SpritesDrawer() {
         setTitle("Draw your horse");
-        setSize(600, 400);
+        setSize(400, 440);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         canvas = new JPanel() {
             @Override
@@ -22,6 +24,7 @@ public class SpritesDrawer extends JFrame {
                 int height = getHeight();
                 for (int x = 0; x < width; x += pixelSize) {
                     for (int y = 0; y < height; y += pixelSize) {
+                        pixelsDrawn[x][y] = new Color(255,255,255);
                         g.setColor(Color.WHITE);
                         g.fillRect(x, y, pixelSize, pixelSize);
                         g.setColor(Color.BLACK);
@@ -30,6 +33,9 @@ public class SpritesDrawer extends JFrame {
                 }
             }
         };
+
+        pixelsDrawn = new Color[getWidth()/pixelSize][getHeight()/pixelSize];
+
         canvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -65,6 +71,7 @@ public class SpritesDrawer extends JFrame {
     private void drawPixel(MouseEvent e) {
         int x = e.getX() / pixelSize * pixelSize;
         int y = e.getY() / pixelSize * pixelSize;
+        pixelsDrawn[x][y] = currentColor;
         Graphics g = canvas.getGraphics();
         g.setColor(currentColor);
         g.fillRect(x, y, pixelSize, pixelSize);
@@ -76,6 +83,7 @@ public class SpritesDrawer extends JFrame {
         int height = getHeight();
         for (int x = 0; x < width; x += pixelSize) {
             for (int y = 0; y < height; y += pixelSize) {
+                pixelsDrawn[x][y] = new Color(255,255,255);
                 g.setColor(Color.WHITE);
                 g.fillRect(x, y, pixelSize, pixelSize);
                 g.setColor(Color.BLACK);

@@ -1,7 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.HorseLanes;
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.RaceData;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.HorseStatus;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.SettingsBar;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RaceUI extends JFrame {
     private HorseLanes lanes;
-    private RaceData race;
+    private HorseStatus race;
     private SettingsBar settingsBar;
     public RaceUI() {
         super("Horse Race simulator");
@@ -55,7 +55,7 @@ public class RaceUI extends JFrame {
         this.lanes = new HorseLanes();
         this.add(this.lanes, BorderLayout.WEST);
 
-        this.race = new RaceData();
+        this.race = new HorseStatus();
         this.add(this.race, BorderLayout.EAST);
 
         this.setVisible(true);
