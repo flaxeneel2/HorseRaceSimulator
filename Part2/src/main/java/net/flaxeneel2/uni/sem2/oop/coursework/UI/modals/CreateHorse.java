@@ -23,10 +23,15 @@ public class CreateHorse extends JFrame {
 
     private String name;
 
+    private ViewHorses horseViewer;
 
 
-    public CreateHorse() {
+
+    public CreateHorse(ViewHorses horseViewer) {
         super("Create Horse");
+        this.horseViewer = horseViewer;
+        this.confidence = 0.5;
+        this.breed = "Thoroughbred";
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         FlowLayout layout = new FlowLayout();
         layout.setVgap(10);
@@ -102,13 +107,9 @@ public class CreateHorse extends JFrame {
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.X_AXIS));
         JButton drawButton = new JButton("Draw a new horse");
-        drawButton.addActionListener(e -> {
-            new SpritesDrawer(this);
-        });
+        drawButton.addActionListener(e -> new SpritesDrawer(this));
         this.editButton = new JButton("Edit existing horse");
-        this.editButton.addActionListener(e -> {
-            new SpritesDrawer(this, sprite);
-        });
+        this.editButton.addActionListener(e -> new SpritesDrawer(this, sprite));
         this.editButton.setEnabled(false);
         optionsPanel.add(drawButton);
         optionsPanel.add(this.editButton);
@@ -164,6 +165,7 @@ public class CreateHorse extends JFrame {
 
     public void saveHorseToStore() {
         HorseData horseData = new HorseData(name, breed, confidence, sprite);
+        horseViewer.addEntry(horseData);
         STORAGE.addHorse(horseData);
     }
 }
