@@ -35,12 +35,22 @@ public class HorseStatus extends JPanel {
         for(HorseData horse : newHorses) {
             JPanel horseStatus = new JPanel();
             horseStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
-            horseStatus.setLayout(new GridLayout(4, 1));
+            horseStatus.setLayout(new GridLayout(1, 2));
             horseStatus.setBorder(BorderFactory.createMatteBorder(2,0,2,0,Color.WHITE));
-            horseStatus.add(new JLabel("Name: " + horse.getName()));
-            horseStatus.add(new JLabel("Confidence: " + horse.getConfidence()));
-            horseStatus.add(new JLabel("Breed: " + horse.getBreed()));
-            horseStatus.add(new JLabel("Odds: " + 0.1));
+            JPanel horseInfo = new JPanel();
+            horseInfo.setLayout(new GridLayout(4, 1));
+            horseInfo.add(new JLabel("Name: " + horse.getName()));
+            horseInfo.add(new JLabel("Confidence: " + horse.getConfidence()));
+            horseInfo.add(new JLabel("Breed: " + horse.getBreed()));
+            horseInfo.add(new JLabel("Odds: " + 0.1));
+            JPanel horseAction = new JPanel();
+            horseAction.setLayout(new GridLayout(4, 1));
+            horseAction.add(new JButton("Bet on this horse"));
+            horseAction.add(new JButton("View stats of this horse"));
+            horseAction.add(new JButton("<Unused>"));
+            horseAction.add(new JButton("<Unused>"));
+            horseStatus.add(horseInfo);
+            horseStatus.add(horseAction);
             this.add(horseStatus);
         }
     }
