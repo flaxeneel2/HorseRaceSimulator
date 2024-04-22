@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class HorseStatus extends JPanel {
-    private ArrayList<HorseData> horses;
+    private ArrayList<Horse> horses;
     public HorseStatus() {
 
         super();
@@ -25,14 +25,14 @@ public class HorseStatus extends JPanel {
     }
 
 
-    public void updateLanes(ArrayList<HorseData> newHorses) {
+    public void updateLanes(ArrayList<Horse> newHorses) {
         this.horses.clear();
         this.removeAll();
         this.revalidate();
         this.repaint();
         this.horses = newHorses;
 
-        for(HorseData horse : newHorses) {
+        for(Horse horse : newHorses) {
             JPanel horseStatus = new JPanel();
             horseStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
             horseStatus.setLayout(new GridLayout(1, 2));
@@ -40,8 +40,8 @@ public class HorseStatus extends JPanel {
             JPanel horseInfo = new JPanel();
             horseInfo.setLayout(new GridLayout(4, 1));
             horseInfo.add(new JLabel("Name: " + horse.getName()));
-            horseInfo.add(new JLabel("Confidence: " + horse.getConfidence()));
-            horseInfo.add(new JLabel("Breed: " + horse.getBreed()));
+            horseInfo.add(new JLabel("Confidence: " + horse.getHorseData().getConfidence()));
+            horseInfo.add(new JLabel("Breed: " + horse.getHorseData().getBreed()));
             horseInfo.add(new JLabel("Odds: " + 0.1));
             JPanel horseAction = new JPanel();
             horseAction.setLayout(new GridLayout(4, 1));

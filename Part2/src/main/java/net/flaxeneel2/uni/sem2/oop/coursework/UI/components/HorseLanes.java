@@ -28,7 +28,6 @@ public class HorseLanes extends JPanel {
         this.revalidate();
         this.repaint();
 
-        ArrayList<HorseData> data = new ArrayList<>();
         Random random = new Random();
         for(int i = 0; i < numLanes; i++) {
             HorseData horseData = HorseData.random();
@@ -36,9 +35,8 @@ public class HorseLanes extends JPanel {
             horse.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
             this.add(horse);
             this.horses.add(horse);
-            data.add(horseData);
         }
-        Main.UI_INSTANCE.getRaceStatus().updateLanes(data);
+        Main.UI_INSTANCE.getRaceStatus().updateLanes(this.horses);
     }
 
     public void dealWithSizeChange(int newWidth, int newHeight) {
