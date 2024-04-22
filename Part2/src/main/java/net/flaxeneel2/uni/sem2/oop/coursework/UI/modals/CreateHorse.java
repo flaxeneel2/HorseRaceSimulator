@@ -12,6 +12,18 @@ public class CreateHorse extends JFrame {
         setSize(400, 400);
         this.setResizable(false);
 
+        JComboBox<String> breeds = new JComboBox<>(new String[]{"Thoroughbred",
+                "Arabian",
+                "Quarter Horse",
+                "Appaloosa",
+                "American Paint Horse",
+                "Morgan",
+                "Tennessee Walking Horse",
+                "Andalusian",
+                "Friesian",
+                "Clydesdale"});
+
+        this.add(breeds);
 
         JButton drawButton = new JButton("Draw a new horse");
         drawButton.addActionListener(e -> {
