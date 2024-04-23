@@ -10,7 +10,7 @@ import java.util.Random;
 public class Horse extends Canvas {
     private int distanceTravelled;
     private int distanceTravelledLastFrame;
-    private final int MULT_FACTOR = 15; //makes the race move faster or slower
+    private final int MULT_FACTOR = 10; //makes the race move faster or slower
     private int limit;
 
     private boolean fallen;
