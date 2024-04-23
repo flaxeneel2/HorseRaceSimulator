@@ -80,6 +80,7 @@ public class Horse extends Canvas {
         this.fallen = false;
         this.finishBroadcasted = false;
         this.distanceTravelledLastFrame = 0;
+        this.paint(this.getGraphics());
     }
 
     private void tickFall() {

@@ -28,6 +28,11 @@ public class SettingsBar extends JPanel {
         startButton.addActionListener(e -> Main.UI_INSTANCE.startRace());
         this.add(startButton);
 
+        JButton resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> Main.UI_INSTANCE.resetRace());
+
+        this.add(resetButton);
+
         JButton viewHorses = new JButton("View horses");
         viewHorses.addActionListener(e -> {
             new ViewHorses();

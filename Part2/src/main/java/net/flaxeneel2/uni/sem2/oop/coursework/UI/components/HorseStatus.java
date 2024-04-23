@@ -80,16 +80,13 @@ public class HorseStatus extends JPanel {
         JLabel confidence = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-confidence");
         confidence.setText("Confidence: " + horse.getHorseData().getConfidence());
         numFinished++;
-        System.out.println(numFinished);
         if(numFinished == this.horses.size()) {
-            System.out.println("===========================================================");
             Main.UI_INSTANCE.stopRace();
             this.numFinished = 0;
         }
     }
 
     public void updatePositioningOfHorse(Horse horse) {
-        System.out.printf("Name: %s \t\tPosition: %d%n", horse.getHorseData().getName(),position);
         JLabel positioning = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-positioning");
         positioning.setText("Position: " + this.position);
         if(position == 1) horse.getHorseData().setRacesWon(horse.getHorseData().getRacesWon()+1);

@@ -123,10 +123,7 @@ public class RaceUI extends JFrame {
 
     public void stopRace() {
         executor.shutdown();
-        System.out.println("Race stopped");
         this.settingsBar.enableAllComponents();
-        ScheduledExecutorService reset = Executors.newSingleThreadScheduledExecutor();
-        reset.schedule(this::resetRace, 1, TimeUnit.SECONDS);
     }
 
     public void resetRace() {
