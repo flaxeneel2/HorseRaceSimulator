@@ -1,6 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.EditDefaults;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorses;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveFile;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveWriter;
@@ -66,6 +67,12 @@ public class SettingsBar extends JPanel {
 
         this.add(saveButton);
         this.add(loadButton);
+
+        JButton editDefaults = new JButton("Edit Defaults");
+        editDefaults.addActionListener(e -> {
+            new EditDefaults();
+        });
+        this.add(editDefaults);
 
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));

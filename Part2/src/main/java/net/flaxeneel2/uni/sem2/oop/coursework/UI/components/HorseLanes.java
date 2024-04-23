@@ -34,7 +34,9 @@ public class HorseLanes extends JPanel {
         for(int i = 0; i < numLanes; i++) {
             HorseData horseData = HorseData.random();
             Horse horse = new Horse(this.getWidth(), horseData);
-            horse.setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+            Color trackColor = getSaveFile().laneColor;
+            if(getSaveFile().randomLaneColors) trackColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            horse.setBackground(trackColor);
             this.add(horse);
             this.horses.add(horse);
         }
