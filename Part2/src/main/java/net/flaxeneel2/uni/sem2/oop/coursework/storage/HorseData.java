@@ -1,9 +1,10 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.storage;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class HorseData {
+public class HorseData implements Serializable {
     private String name;
     private String breed;
     private Color[][] sprite;

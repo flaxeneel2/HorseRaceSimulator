@@ -1,15 +1,13 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static net.flaxeneel2.uni.sem2.oop.coursework.Main.STORAGE;
+import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class ViewHorses extends JFrame {
 
@@ -39,7 +37,7 @@ public class ViewHorses extends JFrame {
 
         this.horsesList = new JPanel();
 
-        this.addEntries(new ArrayList<>(Arrays.asList(STORAGE.getAllHorses())));
+        this.addEntries(new ArrayList<>(Arrays.asList(getSaveFile().horses.getAllHorses())));
     }
 
     public void addEntry(HorseData horse) {

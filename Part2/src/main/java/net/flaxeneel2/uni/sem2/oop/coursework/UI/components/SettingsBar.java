@@ -2,10 +2,16 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorses;
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveFile;
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveWriter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 import java.util.Arrays;
+
+import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class SettingsBar extends JPanel {
 
@@ -26,6 +32,40 @@ public class SettingsBar extends JPanel {
             new ViewHorses();
         });
         this.add(viewHorses);
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+            chooser.setSelectedFile(new File("Save.hrs"));
+            chooser.setFileFilter(new FileNameExtensionFilter("Horse Race Simulator Saves", "hrs"));
+            chooser.showSaveDialog(this);
+            if (chooser.getSelectedFile() != null) {
+                File file = chooser.getSelectedFile();
+                SaveWriter.save(getSaveFile(), file);
+            }
+        });
+
+        JButton loadButton = new JButton("Load");
+        loadButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+            chooser.setSelectedFile(new File("Save.hrs"));
+            chooser.setFileFilter(new FileNameExtensionFilter("Horse Race Simulator Saves", "hrs"));
+            chooser.showOpenDialog(this);
+            if (chooser.getSelectedFile() != null) {
+                File file = chooser.getSelectedFile();
+                SaveFile save = SaveWriter.load(file);
+                if(save != null) {
+                    Main.setSaveFile(save);
+                } else {
+                    System.out.println("Was null!");
+                }
+            }
+        });
+
+        this.add(saveButton);
+        this.add(loadButton);
 
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -50,6 +90,9 @@ public class SettingsBar extends JPanel {
         panel.add(laneDropdown);
         return panel;
     }
+
+
+
     public void disableAllComponents() {
         startButton.setText("Race ongoing...");
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));

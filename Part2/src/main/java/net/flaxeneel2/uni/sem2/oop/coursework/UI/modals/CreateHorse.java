@@ -7,7 +7,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-import static net.flaxeneel2.uni.sem2.oop.coursework.Main.STORAGE;
+import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class CreateHorse extends JFrame {
 
@@ -166,6 +166,6 @@ public class CreateHorse extends JFrame {
     public void saveHorseToStore() {
         HorseData horseData = new HorseData(name, breed, confidence, sprite);
         horseViewer.addEntry(horseData);
-        STORAGE.addHorse(horseData);
+        getSaveFile().horses.addHorse(horseData);
     }
 }
