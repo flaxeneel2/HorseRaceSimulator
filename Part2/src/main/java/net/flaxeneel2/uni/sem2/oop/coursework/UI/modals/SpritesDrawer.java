@@ -22,7 +22,7 @@ public class SpritesDrawer extends JFrame {
 
         pixelsDrawn = canvasState;
         boolean fresh = canvasState == null;
-        if(pixelsDrawn == null) pixelsDrawn = new Color[getWidth()/pixelSize * pixelSize][getHeight()/pixelSize * pixelSize];
+        if(pixelsDrawn == null) pixelsDrawn = new Color[100][100];
 
         canvas = new JPanel() {
             @Override
@@ -30,11 +30,12 @@ public class SpritesDrawer extends JFrame {
                 super.paintComponent(g);
                 int width = getWidth();
                 int height = getHeight();
-
+                int extX = 0;
+                int extY = 0;
                 for (int x = 0; x < width; x += pixelSize) {
                     for (int y = 0; y < height; y += pixelSize) {
                         if(fresh) {
-                            pixelsDrawn[x][y] = new Color(255,255,255, 0);
+                            pixelsDrawn[extX][extY] = new Color(255,255,255, 0);
                             g.setColor(Color.WHITE);
                         } else {
                             if(pixelsDrawn[x][y].getRGB() == new Color(255,255,255,0).getRGB()) g.setColor(Color.WHITE);
@@ -43,7 +44,10 @@ public class SpritesDrawer extends JFrame {
                         g.fillRect(x, y, pixelSize, pixelSize);
                         g.setColor(Color.BLACK);
                         g.drawRect(x, y, pixelSize, pixelSize);
+                        extY++;
                     }
+                    extY=0;
+                    extX++;
                 }
             }
         };
@@ -86,10 +90,10 @@ public class SpritesDrawer extends JFrame {
     }
 
     private void drawPixel(MouseEvent e) {
-        if(e.getX() >= getWidth() || e.getY() >= getHeight() || e.getX() < 0 || e.getY() < 0) return;
+        if(e.getX() >= getWidth()-3 || e.getY() >= getHeight()-3 || e.getX() < 0 || e.getY() < 0) return;
         int x = e.getX() / pixelSize * pixelSize;
         int y = e.getY() / pixelSize * pixelSize;
-        pixelsDrawn[x][y] = currentColor;
+        pixelsDrawn[x/10][y/10] = currentColor;
         Graphics g = canvas.getGraphics();
         g.setColor(currentColor);
         g.fillRect(x, y, pixelSize, pixelSize);
@@ -99,14 +103,19 @@ public class SpritesDrawer extends JFrame {
         Graphics g = canvas.getGraphics();
         int width = getWidth();
         int height = getHeight();
-        for (int x = 0; x < width-pixelSize; x += pixelSize) {
-            for (int y = 0; y < height-pixelSize; y += pixelSize) {
-                pixelsDrawn[x][y] = new Color(255,255,255, 0);
+        int extX = 0;
+        int extY = 0;
+        for (int x = 0; x < width; x += pixelSize) {
+            for (int y = 0; y < height; y += pixelSize) {
+                pixelsDrawn[extX][extY] = new Color(255,255,255, 0);
                 g.setColor(Color.WHITE);
                 g.fillRect(x, y, pixelSize, pixelSize);
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, pixelSize, pixelSize);
+                extY++;
             }
+            extY=0;
+            extX++;
         }
     }
 }
