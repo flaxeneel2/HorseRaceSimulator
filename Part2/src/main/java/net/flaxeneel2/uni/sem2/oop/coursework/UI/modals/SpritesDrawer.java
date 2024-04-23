@@ -16,7 +16,7 @@ public class SpritesDrawer extends JFrame {
 
     public SpritesDrawer(CreateHorse parentFrame, Color[][] canvasState) {
         setTitle("Draw your horse");
-        setSize(400, 400);
+        setSize(416, 476);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
@@ -30,13 +30,15 @@ public class SpritesDrawer extends JFrame {
                 super.paintComponent(g);
                 int width = getWidth();
                 int height = getHeight();
+
                 for (int x = 0; x < width; x += pixelSize) {
                     for (int y = 0; y < height; y += pixelSize) {
                         if(fresh) {
-                            pixelsDrawn[x][y] = new Color(255,255,255);
+                            pixelsDrawn[x][y] = new Color(255,255,255, 0);
                             g.setColor(Color.WHITE);
                         } else {
-                            g.setColor(pixelsDrawn[x][y]);
+                            if(pixelsDrawn[x][y].getRGB() == new Color(255,255,255,0).getRGB()) g.setColor(Color.WHITE);
+                            else g.setColor(pixelsDrawn[x][y]);
                         }
                         g.fillRect(x, y, pixelSize, pixelSize);
                         g.setColor(Color.BLACK);
@@ -84,7 +86,7 @@ public class SpritesDrawer extends JFrame {
     }
 
     private void drawPixel(MouseEvent e) {
-        if(e.getX() >= getWidth() || e.getY() >= getHeight()) return;
+        if(e.getX() >= getWidth() || e.getY() >= getHeight() || e.getX() < 0 || e.getY() < 0) return;
         int x = e.getX() / pixelSize * pixelSize;
         int y = e.getY() / pixelSize * pixelSize;
         pixelsDrawn[x][y] = currentColor;
@@ -97,9 +99,9 @@ public class SpritesDrawer extends JFrame {
         Graphics g = canvas.getGraphics();
         int width = getWidth();
         int height = getHeight();
-        for (int x = 0; x < width; x += pixelSize) {
-            for (int y = 0; y < height; y += pixelSize) {
-                pixelsDrawn[x][y] = new Color(255,255,255);
+        for (int x = 0; x < width-pixelSize; x += pixelSize) {
+            for (int y = 0; y < height-pixelSize; y += pixelSize) {
+                pixelsDrawn[x][y] = new Color(255,255,255, 0);
                 g.setColor(Color.WHITE);
                 g.fillRect(x, y, pixelSize, pixelSize);
                 g.setColor(Color.BLACK);
