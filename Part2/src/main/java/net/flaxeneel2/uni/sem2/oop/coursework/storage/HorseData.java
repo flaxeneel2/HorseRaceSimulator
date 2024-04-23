@@ -18,6 +18,33 @@ public class HorseData implements Serializable {
         this.breed = breed;
         this.confidence = confidence;
         this.sprite = sprite;
+        this.racesWon = 0;
+        this.racesLost = 0;
+        this.averageSpeed = 0;
+    }
+
+    public int getRacesWon() {
+        return racesWon;
+    }
+
+    public void setRacesWon(int racesWon) {
+        this.racesWon = racesWon;
+    }
+
+    public int getRacesLost() {
+        return racesLost;
+    }
+
+    public void setRacesLost(int racesLost) {
+        this.racesLost = racesLost;
+    }
+
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
+
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
     }
 
     public String getName() {
@@ -54,27 +81,48 @@ public class HorseData implements Serializable {
 
 
     public static HorseData random() {
-        final String[] RANDOM_NAMES = {
-                "Midnight Shadow",
-                "Golden Star",
-                "Whispering Wind",
-                "Thunder Hoof",
-                "Misty Meadow",
-                "Silver Blaze",
-                "Stormy Sky",
-                "Dancing Spirit",
-                "Rusty Sun",
-                "Sapphire Dream",
-                "Moonlit Magic",
-                "Rocky Mountain",
-                "Sunny Day",
-                "Frosty Morning",
-                "Autumn Breeze",
-                "Spirit Dancer",
-                "Rapid Fire",
-                "Amber Sunset",
+        final String[] RANDOM_LAST_NAMES = {
+                "Shadow",
+                "Star",
+                "Wind",
+                "Hoof",
+                "Meadow",
+                "Blaze",
+                "Sky",
+                "Spirit",
+                "Sun",
+                "Dream",
+                "Magic",
+                "Mountain",
+                "Day",
+                "Morning",
+                "Breeze",
+                "Dancer",
+                "Fire",
+                "Sunset",
+                "Valley"
+        };
+        final String[] RANDOM_FIRST_NAMES = {
+                "Midnight",
+                "Golden",
+                "Whispering",
+                "Thunder",
+                "Misty",
+                "Silver",
+                "Stormy",
+                "Dancing",
+                "Rusty",
+                "Sapphire",
+                "Moonlit",
+                "Rocky",
+                "Sunny",
+                "Frosty",
+                "Autumn",
+                "Spirit",
+                "Rapid",
+                "Amber",
                 "Wildflower",
-                "Echo Valley"
+                "Echo"
         };
 
         final String[] RANDOM_BREEDS = new String[]{
@@ -91,7 +139,7 @@ public class HorseData implements Serializable {
         };
 
         Random rand = new Random();
-        String name = RANDOM_NAMES[rand.nextInt(RANDOM_NAMES.length)];
+        String name = RANDOM_FIRST_NAMES[rand.nextInt(RANDOM_FIRST_NAMES.length)] + " " + RANDOM_LAST_NAMES[rand.nextInt(RANDOM_LAST_NAMES.length)];
         String breed = RANDOM_BREEDS[rand.nextInt(RANDOM_BREEDS.length)];
         double confidence = rand.nextDouble(0.05, 1);
 //        Color[][] sprite = new Color[10][10];

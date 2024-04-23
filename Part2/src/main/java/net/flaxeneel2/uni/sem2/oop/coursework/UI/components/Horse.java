@@ -14,6 +14,9 @@ public class Horse extends Canvas {
     private int distanceTravelled;
     private int distanceTravelledLastFrame;
     private final int MULT_FACTOR = 7; //makes the race move faster or slower
+
+    private boolean finishBroadcasted = false;
+
     private int limit;
 
     private boolean fallen;
@@ -33,6 +36,13 @@ public class Horse extends Canvas {
     }
 
     public void tick() {
+        if(this.hasFinished() && !this.finishBroadcasted) {
+            Main.UI_INSTANCE.getRaceStatus().updatePositioningOfHorse(this);
+            this.horseData.setConfidence(this.horseData.getConfidence() + 0.1);
+            Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
+            Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Finished");
+            this.finishBroadcasted = true;
+        }
         if(this.fallen || this.hasFinished()) return;
         this.tickFall();
         if(this.fallen) return;
@@ -49,6 +59,7 @@ public class Horse extends Canvas {
 
     public void fall() {
         this.fallen = true;
+        Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Fallen");
         horseData.setConfidence(horseData.getConfidence()-0.1);
         Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
         this.paint(this.getGraphics());
@@ -89,7 +100,6 @@ public class Horse extends Canvas {
 
     public void paint(Graphics gr) {
         if(this.getBufferStrategy() == null) {
-            System.out.println("buff strat made");
             this.createBufferStrategy(2);
         }
         BufferStrategy bufferStrategy = this.getBufferStrategy();

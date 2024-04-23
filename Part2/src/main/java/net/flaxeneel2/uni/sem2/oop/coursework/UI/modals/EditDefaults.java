@@ -37,6 +37,7 @@ public class EditDefaults extends JFrame {
         this.add(trackColor);
 
         JCheckBox randomColor = new JCheckBox("Random Color");
+        randomColor.setSelected(getSaveFile().randomLaneColors);
         this.add(randomColor);
 
         JPanel trackBorderColor = new JPanel();

@@ -16,6 +16,7 @@ public class RaceUI extends JFrame {
     private HorseLanes lanes;
     private HorseStatus raceStatus;
     private SettingsBar settingsBar;
+    private ScheduledExecutorService executor;
     public RaceUI() {
         super("Horse Race simulator");
 
@@ -114,10 +115,15 @@ public class RaceUI extends JFrame {
         return raceStatus;
     }
 
+    public void stopRace() {
+        executor.shutdown();
+        System.out.println("Race stopped");
+    }
+
     public void startRace() {
         this.settingsBar.disableAllComponents();
         this.lanes.readyAllHorses();
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(lanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
         Runnable r = () -> this.settingsBar.enableAllComponents();
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();

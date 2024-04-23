@@ -12,6 +12,9 @@ import java.util.Random;
 
 public class HorseStatus extends JPanel {
     private ArrayList<Horse> horses;
+    private int position = 1;
+    private int numFinished = 0;
+
     public HorseStatus() {
 
         super();
@@ -34,6 +37,8 @@ public class HorseStatus extends JPanel {
         this.revalidate();
         this.repaint();
 
+        this.position = 1;
+
 
         for(Horse horse : this.horses) {
             JPanel horseStatus = new JPanel();
@@ -48,23 +53,51 @@ public class HorseStatus extends JPanel {
             JLabel confidence = new JLabel("Confidence: " + horse.getHorseData().getConfidence());
             this.putClientProperty(horse.getHorseData().getName() + "-confidence", confidence);
             horseInfo.add(confidence);
+
             horseInfo.add(new JLabel("Breed: " + horse.getHorseData().getBreed()));
             horseInfo.add(new JLabel("Odds: " + 0.1));
-            JPanel horseAction = new JPanel();
-            horseAction.setLayout(new GridLayout(4, 1));
-            horseAction.add(new JButton("Bet on this horse"));
-            horseAction.add(new JButton("View stats of this horse"));
-            horseAction.add(new JButton("<Unused>"));
-            horseAction.add(new JButton("<Unused>"));
+            JPanel horseStatusRight = new JPanel();
+            horseStatusRight.setLayout(new GridLayout(4, 1));
+
+            JLabel positioning = new JLabel("Position: DNF");
+            this.putClientProperty(horse.getHorseData().getName() + "-positioning", positioning);
+
+            horseStatusRight.add(positioning);
+
+            JLabel status = new JLabel("Status: Running");
+            this.putClientProperty(horse.getHorseData().getName() + "-status", status);
+            horseStatusRight.add(status);
+
+            horseStatusRight.add(new JButton("Bet on this horse"));
+            horseStatusRight.add(new JButton("View stats of this horse"));
             horseStatus.add(horseInfo);
-            horseStatus.add(horseAction);
+            horseStatus.add(horseStatusRight);
             this.add(horseStatus);
         }
     }
 
     public void updateConfidenceOfHorse(Horse horse) {
         JLabel confidence = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-confidence");
-        confidence.setText(String.valueOf(horse.getHorseData().getConfidence()));
+        confidence.setText("Confidence: " + horse.getHorseData().getConfidence());
+        numFinished++;
+        if(numFinished == this.horses.size()) {
+            Main.UI_INSTANCE.stopRace();
+            this.numFinished = 0;
+        }
+    }
+
+    public void updatePositioningOfHorse(Horse horse) {
+        System.out.printf("Name: %s \t\tPosition: %d%n", horse.getHorseData().getName(),position);
+        JLabel positioning = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-positioning");
+        positioning.setText("Position: " + this.position);
+        if(position == 1) horse.getHorseData().setRacesWon(horse.getHorseData().getRacesWon()+1);
+        else horse.getHorseData().setRacesLost(horse.getHorseData().getRacesLost()+1);
+        position++;
+    }
+
+    public void updateStatusOfHorse(Horse horse, String status) {
+        JLabel statusLabel = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-status");
+        statusLabel.setText("Status: " + status);
     }
 
     public void dealWithSizeChange(int newWidth, int newHeight) {
