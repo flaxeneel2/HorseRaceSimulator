@@ -18,7 +18,6 @@ public class HorseStatus extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.horses = new ArrayList<>();
         this.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         this.setBackground(Color.BLUE);
         this.setPreferredSize(new Dimension((int) (Main.UI_INSTANCE.getSize().width*0.3), Main.UI_INSTANCE.getHeight()-100));
@@ -26,21 +25,29 @@ public class HorseStatus extends JPanel {
 
 
     public void updateLanes(ArrayList<Horse> newHorses) {
-        this.horses.clear();
+        if(horses == null) this.horses = newHorses;
+        this.updateLanes();
+    }
+
+    public void updateLanes() {
         this.removeAll();
         this.revalidate();
         this.repaint();
-        this.horses = newHorses;
 
-        for(Horse horse : newHorses) {
+
+        for(Horse horse : this.horses) {
             JPanel horseStatus = new JPanel();
             horseStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
             horseStatus.setLayout(new GridLayout(1, 2));
-            horseStatus.setBorder(BorderFactory.createMatteBorder(2,0,2,0,Color.WHITE));
+            horseStatus.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.WHITE));
             JPanel horseInfo = new JPanel();
             horseInfo.setLayout(new GridLayout(4, 1));
-            horseInfo.add(new JLabel("Name: " + horse.getName()));
-            horseInfo.add(new JLabel("Confidence: " + horse.getHorseData().getConfidence()));
+
+            horseInfo.add(new JLabel("Name: " + horse.getHorseData().getName()));
+
+            JLabel confidence = new JLabel("Confidence: " + horse.getHorseData().getConfidence());
+            this.putClientProperty(horse.getHorseData().getName() + "-confidence", confidence);
+            horseInfo.add(confidence);
             horseInfo.add(new JLabel("Breed: " + horse.getHorseData().getBreed()));
             horseInfo.add(new JLabel("Odds: " + 0.1));
             JPanel horseAction = new JPanel();
@@ -53,6 +60,11 @@ public class HorseStatus extends JPanel {
             horseStatus.add(horseAction);
             this.add(horseStatus);
         }
+    }
+
+    public void updateConfidenceOfHorse(Horse horse) {
+        JLabel confidence = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-confidence");
+        confidence.setText(String.valueOf(horse.getHorseData().getConfidence()));
     }
 
     public void dealWithSizeChange(int newWidth, int newHeight) {
