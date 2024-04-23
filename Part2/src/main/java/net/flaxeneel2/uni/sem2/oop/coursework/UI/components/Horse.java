@@ -110,7 +110,7 @@ public class Horse extends Canvas {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(3));
         g2d.setColor(getSaveFile().laneBorderColor);
-        g2d.drawRect(0, 0, getWidth(), getHeight() - 2);
+        g2d.drawRect(0, 0, getWidth(), getHeight() - 1);
         Color[][] sprite = this.getHorseData().getSprite();
         for (Color[] row : sprite) {
             if(row.length==0) continue;

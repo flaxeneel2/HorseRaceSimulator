@@ -1,10 +1,10 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveFile;
-import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveWriter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.setSaveFile;
@@ -19,38 +19,46 @@ public class EditDefaults extends JFrame {
         layout.setVgap(10);
         this.setLayout(layout);
 
-        JPanel trackColor = new JPanel();
-        trackColor.setLayout(new BorderLayout());
-        trackColor.setPreferredSize(new Dimension(this.getWidth()-20, 50));
-        trackColor.setBackground(getSaveFile().laneColor);
+        JPanel trackColorSelection = new JPanel();
+        trackColorSelection.setLayout(new BorderLayout());
+        trackColorSelection.setPreferredSize(new Dimension(this.getWidth()-20, 50));
+        trackColorSelection.setBorder(BorderFactory.createLineBorder(getSaveFile().laneColor));
         JButton colorChooserButton = new JButton("Choose Color");
 
+        AtomicReference<Color> trackColor = new AtomicReference<>(getSaveFile().laneColor);
 
         //colorButton.addActionListener(e -> currentColor = JColorChooser.showDialog(null, "Choose Color", currentColor));
         colorChooserButton.addActionListener(e -> {
-            trackColor.setBackground(JColorChooser.showDialog(this, "Choose Color", trackColor.getBackground()));
+            trackColor.set(JColorChooser.showDialog(this, "Choose Color", trackColor.get()));
+            trackColorSelection.setBorder(BorderFactory.createLineBorder(trackColor.get()));
         });
 
-        trackColor.add(new JLabel("Track Color:"), BorderLayout.WEST);
-        trackColor.add(colorChooserButton, BorderLayout.EAST);
+        trackColorSelection.add(new JLabel("Track Color:"), BorderLayout.WEST);
+        trackColorSelection.add(colorChooserButton, BorderLayout.EAST);
 
-        this.add(trackColor);
+        this.add(trackColorSelection);
 
         JCheckBox randomColor = new JCheckBox("Random Color");
         randomColor.setSelected(getSaveFile().randomLaneColors);
         this.add(randomColor);
 
-        JPanel trackBorderColor = new JPanel();
-        trackBorderColor.setLayout(new BorderLayout());
-        trackBorderColor.setPreferredSize(new Dimension(this.getWidth()-20, 50));
+        JPanel trackBorderColorSelection = new JPanel();
+
+        trackBorderColorSelection.setBorder(BorderFactory.createLineBorder(getSaveFile().laneBorderColor));
+
+        AtomicReference<Color> trackBorderColor = new AtomicReference<>(getSaveFile().laneBorderColor);
+
+        trackBorderColorSelection.setLayout(new BorderLayout());
+        trackBorderColorSelection.setPreferredSize(new Dimension(this.getWidth()-20, 50));
         JButton trackBorderColorChooserButton = new JButton("Choose Border Color");
         trackBorderColorChooserButton.addActionListener(e -> {
-            trackBorderColor.setBackground(JColorChooser.showDialog(this, "Choose Color", trackBorderColor.getBackground()));
+            trackBorderColor.set(JColorChooser.showDialog(this, "Choose Color", trackBorderColorSelection.getBackground()));
+            trackBorderColorSelection.setBorder(BorderFactory.createLineBorder(trackBorderColor.get()));
         });
 
-        trackBorderColor.add(new JLabel("Track Border Color:"), BorderLayout.WEST);
-        trackBorderColor.add(trackBorderColorChooserButton, BorderLayout.EAST);
-        this.add(trackBorderColor);
+        trackBorderColorSelection.add(new JLabel("Track Border Color:"), BorderLayout.WEST);
+        trackBorderColorSelection.add(trackBorderColorChooserButton, BorderLayout.EAST);
+        this.add(trackBorderColorSelection);
 
 
 
@@ -73,8 +81,8 @@ public class EditDefaults extends JFrame {
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
             SaveFile save = getSaveFile();
-            save.laneColor = trackColor.getBackground();
-            save.laneBorderColor = trackBorderColor.getBackground();
+            save.laneColor = trackColor.get();
+            save.laneBorderColor = trackBorderColor.get();
             save.randomLaneColors = randomColor.isSelected();
             setSaveFile(save);
             this.dispose();
