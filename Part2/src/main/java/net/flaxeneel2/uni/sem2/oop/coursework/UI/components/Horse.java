@@ -78,6 +78,7 @@ public class Horse extends Canvas {
 
         this.distanceTravelled = 0;
         this.fallen = false;
+        this.finishBroadcasted = false;
         this.distanceTravelledLastFrame = 0;
     }
 

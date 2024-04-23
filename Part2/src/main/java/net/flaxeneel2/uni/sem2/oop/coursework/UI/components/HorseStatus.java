@@ -34,8 +34,6 @@ public class HorseStatus extends JPanel {
 
     public void updateLanes() {
         this.removeAll();
-        this.revalidate();
-        this.repaint();
 
         this.position = 1;
 
@@ -74,13 +72,17 @@ public class HorseStatus extends JPanel {
             horseStatus.add(horseStatusRight);
             this.add(horseStatus);
         }
+        this.revalidate();
+        this.repaint();
     }
 
     public void updateConfidenceOfHorse(Horse horse) {
         JLabel confidence = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-confidence");
         confidence.setText("Confidence: " + horse.getHorseData().getConfidence());
         numFinished++;
+        System.out.println(numFinished);
         if(numFinished == this.horses.size()) {
+            System.out.println("===========================================================");
             Main.UI_INSTANCE.stopRace();
             this.numFinished = 0;
         }

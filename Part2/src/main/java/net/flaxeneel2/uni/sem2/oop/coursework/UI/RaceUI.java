@@ -59,6 +59,9 @@ public class RaceUI extends JFrame {
         this.raceStatus = new HorseStatus();
         this.add(this.raceStatus, BorderLayout.EAST);
 
+
+        this.lanes.updateLanes(3);
+
         this.setVisible(true);
 
     }
@@ -122,6 +125,14 @@ public class RaceUI extends JFrame {
         executor.shutdown();
         System.out.println("Race stopped");
         this.settingsBar.enableAllComponents();
+        ScheduledExecutorService reset = Executors.newSingleThreadScheduledExecutor();
+        reset.schedule(this::resetRace, 1, TimeUnit.SECONDS);
+    }
+
+    public void resetRace() {
+        this.lanes.readyAllHorses();
+        this.settingsBar.enableAllComponents();
+        this.raceStatus.updateLanes();
     }
 
     public void startRace() {

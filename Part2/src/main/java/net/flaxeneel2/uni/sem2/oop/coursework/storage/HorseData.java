@@ -76,7 +76,7 @@ public class HorseData implements Serializable {
     }
 
     public void setConfidence(double confidence) {
-        this.confidence = confidence;
+        this.confidence = Math.min(1, Math.max(0.1, confidence));
     }
 
 
