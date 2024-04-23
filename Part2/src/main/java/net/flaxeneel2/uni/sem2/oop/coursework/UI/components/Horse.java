@@ -4,8 +4,10 @@ import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
+
+import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
+
 
 public class Horse extends Canvas {
     private int distanceTravelled;
@@ -16,6 +18,7 @@ public class Horse extends Canvas {
     private boolean fallen;
 
     private HorseData horseData;
+
 
 
     public Horse(int limit, HorseData horseData) {
@@ -60,6 +63,7 @@ public class Horse extends Canvas {
     }
 
     public void getReady() {
+
         this.distanceTravelled = 0;
         this.fallen = false;
         this.distanceTravelledLastFrame = 0;
@@ -86,6 +90,10 @@ public class Horse extends Canvas {
         g.clearRect(distanceTravelledLastFrame-50, 30, distanceTravelled -distanceTravelledLastFrame+100, 100);
         int xOffset = 0;
         int yOffset  = 0;
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(3));
+        g2d.setColor(getSaveFile().laneBorderColor);
+        g2d.drawRect(0, 0, getWidth(), getHeight() - 2);
         Color[][] sprite = this.getHorseData().getSprite();
         for (Color[] row : sprite) {
             if(row.length==0) continue;
