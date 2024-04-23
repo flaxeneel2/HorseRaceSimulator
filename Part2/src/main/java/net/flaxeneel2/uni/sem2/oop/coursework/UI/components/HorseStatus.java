@@ -91,11 +91,30 @@ public class HorseStatus extends JPanel {
         positioning.setText("Position: " + this.position);
         if(position == 1) horse.getHorseData().setRacesWon(horse.getHorseData().getRacesWon()+1);
         else horse.getHorseData().setRacesLost(horse.getHorseData().getRacesLost()+1);
+        switch (position) {
+            case 1:
+                positioning.setForeground(new Color(255, 215, 0));
+                break;
+            case 2:
+                positioning.setForeground(new Color(255, 255, 255));
+                break;
+            case 3:
+                positioning.setForeground(new Color(205, 127, 50));
+                break;
+            default:
+                positioning.setForeground(new Color(255, 255, 255, 128));
+                break;
+        }
         position++;
     }
 
     public void updateStatusOfHorse(Horse horse, String status) {
         JLabel statusLabel = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-status");
+        if(status.equals("Fallen")) {
+            statusLabel.setForeground(Color.RED);
+            JLabel positioning = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-positioning");
+            positioning.setForeground(Color.RED);
+        }
         statusLabel.setText("Status: " + status);
     }
 
