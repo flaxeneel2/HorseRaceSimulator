@@ -4,6 +4,7 @@ import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
@@ -32,7 +33,7 @@ public class Horse extends Canvas {
     }
 
     public void tick() {
-        if(this.fallen) return;
+        if(this.fallen || this.hasFinished()) return;
         this.tickFall();
         if(this.fallen) return;
         distanceTravelledLastFrame = distanceTravelled;
@@ -83,11 +84,17 @@ public class Horse extends Canvas {
     }
 
     public boolean hasFinished() {
-        return false;
+        return this.distanceTravelled + 100 >= this.limit;
     }
 
-    public void paint(Graphics g) {
-        g.clearRect(distanceTravelledLastFrame-50, 30, distanceTravelled -distanceTravelledLastFrame+100, 100);
+    public void paint(Graphics gr) {
+        if(this.getBufferStrategy() == null) {
+            System.out.println("buff strat made");
+            this.createBufferStrategy(2);
+        }
+        BufferStrategy bufferStrategy = this.getBufferStrategy();
+        Graphics g = bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, getWidth(), getHeight());
         int xOffset = 0;
         int yOffset  = 0;
         Graphics2D g2d = (Graphics2D) g;
@@ -106,6 +113,10 @@ public class Horse extends Canvas {
             yOffset = 0;
             xOffset += 2;
         }
+
+        g.dispose();
+
+        bufferStrategy.show();
 
     }
 }

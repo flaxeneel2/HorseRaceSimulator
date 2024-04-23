@@ -7,5 +7,5 @@ public class SaveFile implements Serializable {
     public HorsesStore horses = new HorsesStore();
     public Color laneColor = Color.WHITE;
     public Color laneBorderColor = Color.BLACK;
-    public boolean randomLaneColors = false;
+    public boolean randomLaneColors = true;
 }
