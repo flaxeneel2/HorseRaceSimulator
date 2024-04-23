@@ -118,6 +118,7 @@ public class RaceUI extends JFrame {
     public void stopRace() {
         executor.shutdown();
         System.out.println("Race stopped");
+        this.settingsBar.enableAllComponents();
     }
 
     public void startRace() {
@@ -125,9 +126,5 @@ public class RaceUI extends JFrame {
         this.lanes.readyAllHorses();
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(lanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
-        Runnable r = () -> this.settingsBar.enableAllComponents();
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-        executorService.schedule(r, 5, TimeUnit.SECONDS);
     }
 }
