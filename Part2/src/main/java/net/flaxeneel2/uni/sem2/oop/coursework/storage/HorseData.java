@@ -169,12 +169,7 @@ public class HorseData implements Serializable {
         String name = RANDOM_FIRST_NAMES[rand.nextInt(RANDOM_FIRST_NAMES.length)] + " " + RANDOM_LAST_NAMES[rand.nextInt(RANDOM_LAST_NAMES.length)];
         String breed = RANDOM_BREEDS[rand.nextInt(RANDOM_BREEDS.length)];
         double confidence = rand.nextDouble(0.05, 1);
-//        Color[][] sprite = new Color[10][10];
-//        for (int i = 0; i < 10; i++) {
-//            for (int j = 0; j < 10; j++) {
-//                sprite[i][j] = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
-//            }
-//        }
+        // TODO: make the horse look less demented
         Color[][] sprite = new Color[][] {
                 new Color[] {
                         new Color(255, 255, 255, 0),

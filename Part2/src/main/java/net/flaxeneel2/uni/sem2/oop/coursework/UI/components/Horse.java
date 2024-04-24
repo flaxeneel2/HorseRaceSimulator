@@ -131,7 +131,7 @@ public class Horse extends Canvas {
 
                 Color c = this.fallen && color.getAlpha() != 0 ? new Color(255, 0, 0) : color;
                 g.setColor(c);
-                g.fillRect(distanceTravelled + xOffset, 15 + yOffset, PIXEL_SIZE, PIXEL_SIZE);
+                g.fillRect(distanceTravelled + xOffset, ((this.getHeight())/3) + yOffset, PIXEL_SIZE, PIXEL_SIZE);
                 yOffset += PIXEL_SIZE;
             }
             yOffset = 0;
