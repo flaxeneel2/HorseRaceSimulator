@@ -1,7 +1,10 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.storage;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
+
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class HorseData implements Serializable {
@@ -21,6 +24,15 @@ public class HorseData implements Serializable {
         this.sprite = sprite;
         this.racesWon = 0;
         this.racesLost = 0;
+    }
+
+    public double getOdds(ArrayList<Horse> horses) {
+        double averageSpeed = this.getAverageSpeed();
+        for(Horse horse : horses) {
+
+        }
+        //TODO: implement this
+        return 0;
     }
 
     public double getAverageSpeed() {
