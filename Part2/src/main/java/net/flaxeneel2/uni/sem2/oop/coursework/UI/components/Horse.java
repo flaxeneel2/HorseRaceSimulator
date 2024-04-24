@@ -96,6 +96,10 @@ public class Horse extends Canvas {
         return horseData;
     }
 
+    public void setHorseData(HorseData horseData) {
+        this.horseData = horseData;
+    }
+
     public boolean hasFinished() {
         return this.distanceTravelled + 100 >= this.limit;
     }

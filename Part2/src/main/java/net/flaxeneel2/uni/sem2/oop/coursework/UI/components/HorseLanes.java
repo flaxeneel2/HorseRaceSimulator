@@ -50,11 +50,22 @@ public class HorseLanes extends JPanel {
         }
     }
 
+    public int getLaneCount() {
+        return this.horses.size();
+    }
+
     public void readyAllHorses() {
         for(Horse horse : this.horses) {
             horse.setLimit(this.getWidth());
             horse.getReady();
         }
+    }
+
+    public void setHorse(Horse horse, int index) {
+        this.horses.set(index, horse);
+        ((Horse) this.getComponent(index)).setHorseData(horse.getHorseData());
+        this.getComponent(index).repaint();
+        Main.UI_INSTANCE.getRaceStatus().updateLanes();
     }
 
     public void tickAllHorses() {

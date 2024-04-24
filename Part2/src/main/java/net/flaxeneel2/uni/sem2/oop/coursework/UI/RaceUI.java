@@ -113,8 +113,6 @@ public class RaceUI extends JFrame {
         UIManager.put("CheckBox.background", new Color(34, 34, 34));
         UIManager.put("CheckBox.foreground", new Color(255, 255, 255));
 
-
-
     }
 
     public HorseStatus getRaceStatus() {

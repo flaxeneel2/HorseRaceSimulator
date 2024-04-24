@@ -1,5 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.Main;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
@@ -68,6 +70,9 @@ public class ViewHorses extends JFrame {
         horsePanel.add(details);
 
         JButton useHorse = new JButton("Use Horse");
+
+        useHorse.addActionListener(e -> new UseHorse(new Horse(Main.UI_INSTANCE.getLanes().getWidth(), horse)));
+
         JButton deleteHorse = new JButton("Delete Horse");
         JButton viewHorseStats = new JButton("View Horse Stats");
 

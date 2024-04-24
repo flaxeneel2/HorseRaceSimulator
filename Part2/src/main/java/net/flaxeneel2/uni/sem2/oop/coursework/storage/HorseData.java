@@ -10,6 +10,8 @@ public class HorseData implements Serializable {
     private Color[][] sprite;
     private double confidence;
     private int racesWon;
+    private int timeOnTrack; // in ms
+    private int totalDistanceTravelled; // in px
     private int racesLost;
     private double averageSpeed;
     public HorseData(String name, String breed, double confidence, Color[][] sprite) {
@@ -21,6 +23,22 @@ public class HorseData implements Serializable {
         this.racesWon = 0;
         this.racesLost = 0;
         this.averageSpeed = 0;
+    }
+
+    public int getTimeOnTrack() {
+        return timeOnTrack;
+    }
+
+    public void setTimeOnTrack(int timeOnTrack) {
+        this.timeOnTrack = timeOnTrack;
+    }
+
+    public int getTotalDistanceTravelled() {
+        return totalDistanceTravelled;
+    }
+
+    public void setTotalDistanceTravelled(int totalDistanceTravelled) {
+        this.totalDistanceTravelled = totalDistanceTravelled;
     }
 
     public int getRacesWon() {
