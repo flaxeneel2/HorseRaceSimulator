@@ -128,7 +128,8 @@ public class Horse extends Canvas {
         for (Color[] row : sprite) {
             if(row.length==0) continue;
             for (Color color : row) {
-                Color c = this.fallen ? new Color(255, 0, 0) : color;
+
+                Color c = this.fallen && color.getAlpha() != 0 ? new Color(255, 0, 0) : color;
                 g.setColor(c);
                 g.fillRect(distanceTravelled + xOffset, 15 + yOffset, PIXEL_SIZE, PIXEL_SIZE);
                 yOffset += PIXEL_SIZE;
