@@ -1,12 +1,14 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorseStats;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -67,7 +69,12 @@ public class HorseStatus extends JPanel {
             horseStatusRight.add(status);
 
             horseStatusRight.add(new JButton("Bet on this horse"));
-            horseStatusRight.add(new JButton("View stats of this horse"));
+
+            JButton viewStats = new JButton("View stats of this horse");
+            viewStats.addActionListener(e -> new ViewHorseStats(horse.getHorseData()));
+
+
+            horseStatusRight.add(viewStats);
             horseStatus.add(horseInfo);
             horseStatus.add(horseStatusRight);
             this.add(horseStatus);
