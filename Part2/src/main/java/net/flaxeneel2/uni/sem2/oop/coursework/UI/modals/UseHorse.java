@@ -9,18 +9,20 @@ import java.awt.*;
 public class UseHorse extends JFrame {
     private int selectedLane = 1;
     public UseHorse(HorseData horse) {
-        super("Select a lane for the horse");
+        super("Select a lane");
 
-        this.setSize(new Dimension(400, 200));
-        this.setLayout(new GridLayout(2, 1));
+        this.setSize(new Dimension(200, 200));
+        this.setLayout(new FlowLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
+
+        this.add(new JLabel("Select the lane for the horse"));
 
         JPanel selector = new JPanel();
 
         selector.setSize(new Dimension(this.getWidth(), 50));
 
-        GridLayout selectorLayout = new GridLayout(1, 2);
+        FlowLayout selectorLayout = new FlowLayout();
         selectorLayout.setHgap(10);
         selector.setLayout(selectorLayout);
         selector.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
@@ -34,10 +36,10 @@ public class UseHorse extends JFrame {
         possibleLanes.addActionListener(e -> selectedLane = possibleLanes.getSelectedIndex()+1);
 
         JPanel actions = new JPanel();
-        GridLayout actionsLayout = new GridLayout(1, 2);
+        FlowLayout actionsLayout = new FlowLayout();
         actions.setLayout(actionsLayout);
 
-        actions.setSize(new Dimension(this.getWidth(), 50));
+        actions.setSize(new Dimension(this.getWidth(), 25));
 
         JButton ok = new JButton("OK");
 

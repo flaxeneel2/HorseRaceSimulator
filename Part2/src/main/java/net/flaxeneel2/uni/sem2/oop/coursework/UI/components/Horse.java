@@ -16,6 +16,8 @@ public class Horse extends Canvas {
 
     private boolean finishBroadcasted = false;
 
+    private int amountBet;
+
     private int limit;
 
     private boolean fallen;
@@ -31,6 +33,7 @@ public class Horse extends Canvas {
         this.distanceTravelled = 0;
         this.horseData = horseData;
         this.limit = limit;
+        this.amountBet = 0;
     }
 
     public void tick() {
@@ -74,11 +77,16 @@ public class Horse extends Canvas {
         this.limit = limit;
     }
 
+    public void addToBed(int amount) {
+        this.amountBet += amount;
+    }
+
     public void getReady() {
 
         this.distanceTravelled = 0;
         this.fallen = false;
         this.finishBroadcasted = false;
+        this.amountBet = 0;
         this.paint(this.getGraphics());
     }
 
