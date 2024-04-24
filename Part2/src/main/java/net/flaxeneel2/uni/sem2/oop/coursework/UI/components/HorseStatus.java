@@ -1,6 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.Bet;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorseStats;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
@@ -68,7 +69,12 @@ public class HorseStatus extends JPanel {
             this.putClientProperty(horse.getHorseData().getName() + "-status", status);
             horseStatusRight.add(status);
 
-            horseStatusRight.add(new JButton("Bet on this horse"));
+            JButton betButton = new JButton("Bet on this horse");
+            betButton.addActionListener(e -> {
+                new Bet(horse);
+            });
+
+            horseStatusRight.add(betButton);
 
             JButton viewStats = new JButton("View stats of this horse");
             viewStats.addActionListener(e -> new ViewHorseStats(horse.getHorseData()));

@@ -77,7 +77,7 @@ public class Horse extends Canvas {
         this.limit = limit;
     }
 
-    public void addToBed(int amount) {
+    public void addToBet(int amount) {
         this.amountBet += amount;
     }
 
