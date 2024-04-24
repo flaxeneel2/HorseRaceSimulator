@@ -90,7 +90,9 @@ public class SpritesDrawer extends JFrame {
     }
 
     private void drawPixel(MouseEvent e) {
-        if(e.getX() >= getWidth()-3 || e.getY() >= getHeight()-3 || e.getX() < 0 || e.getY() < 0) return;
+        if(e.getX() >= getWidth()-16 || e.getY() >= getHeight()-76 || e.getX() < 0 || e.getY() < 0) return;
+        System.out.printf("Got through X: %s%n", e.getX());
+        System.out.printf("Got through Y: %s%n", e.getY());
         int x = e.getX() / pixelSize * pixelSize;
         int y = e.getY() / pixelSize * pixelSize;
         pixelsDrawn[x/10][y/10] = currentColor;
