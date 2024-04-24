@@ -71,10 +71,13 @@ public class ViewHorses extends JFrame {
 
         JButton useHorse = new JButton("Use Horse");
 
-        useHorse.addActionListener(e -> new UseHorse(new Horse(Main.UI_INSTANCE.getLanes().getWidth(), horse)));
+        useHorse.addActionListener(e -> new UseHorse(horse));
 
         JButton deleteHorse = new JButton("Delete Horse");
         JButton viewHorseStats = new JButton("View Horse Stats");
+
+        viewHorseStats.addActionListener(e -> new ViewHorseStats(horse));
+
 
         actions.add(useHorse,       BorderLayout.NORTH);
         actions.add(viewHorseStats, BorderLayout.CENTER);

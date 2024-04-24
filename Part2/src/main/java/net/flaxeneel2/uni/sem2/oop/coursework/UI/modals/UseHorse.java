@@ -1,14 +1,14 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
+import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UseHorse extends JFrame {
     private int selectedLane = 1;
-    public UseHorse(Horse horse) {
+    public UseHorse(HorseData horse) {
         super("Select a lane for the horse");
 
         this.setSize(new Dimension(400, 200));

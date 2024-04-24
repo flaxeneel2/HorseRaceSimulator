@@ -12,7 +12,6 @@ import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class Horse extends Canvas {
     private int distanceTravelled;
-    private int distanceTravelledLastFrame;
     private final int MULT_FACTOR = 7; //makes the race move faster or slower
 
     private boolean finishBroadcasted = false;
@@ -30,7 +29,6 @@ public class Horse extends Canvas {
         setBackground(Color.WHITE);
         setForeground(Color.RED);
         this.distanceTravelled = 0;
-        this.distanceTravelledLastFrame = 0;
         this.horseData = horseData;
         this.limit = limit;
     }
@@ -43,15 +41,17 @@ public class Horse extends Canvas {
             Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Finished");
             this.finishBroadcasted = true;
         }
+
         if(this.fallen || this.hasFinished()) return;
         this.tickFall();
         if(this.fallen) return;
-        distanceTravelledLastFrame = distanceTravelled;
         int speed = (int) Math.round((new Random().nextDouble(0.5,1.5)*MULT_FACTOR)*(Math.log10(horseData.getConfidence()+0.2) + ((17- horseData.getConfidence())/10)));
         int newOffset = (int) (distanceTravelled + speed);
         if(newOffset < 0) {
             newOffset = 0;
         }
+        this.horseData.setTimeOnTrack(this.horseData.getTimeOnTrack() + 1);
+        this.horseData.setTotalDistanceTravelled(this.horseData.getTotalDistanceTravelled() + speed);
         distanceTravelled = newOffset;
 
         this.paint(this.getGraphics());
@@ -79,13 +79,11 @@ public class Horse extends Canvas {
         this.distanceTravelled = 0;
         this.fallen = false;
         this.finishBroadcasted = false;
-        this.distanceTravelledLastFrame = 0;
         this.paint(this.getGraphics());
     }
 
     private void tickFall() {
         double confidence = horseData.getConfidence();
-        //TODO: fix the equation below.
         double chance = ((Math.pow(Math.E, (2*confidence - 1.25)) - 0.54 - ((2*confidence))/5 + (1/Math.E))/1.93)/45.0;
         if(new Random().nextInt(100) > (1-chance)*100) {
             this.fall();
@@ -105,6 +103,7 @@ public class Horse extends Canvas {
     }
 
     public void paint(Graphics gr) {
+        final int PIXEL_SIZE = 2;
         if(this.getBufferStrategy() == null) {
             this.createBufferStrategy(2);
         }
@@ -123,11 +122,11 @@ public class Horse extends Canvas {
             for (Color color : row) {
                 Color c = this.fallen ? new Color(255, 0, 0) : color;
                 g.setColor(c);
-                g.fillRect(distanceTravelled + xOffset, 30 + yOffset, 2, 2);
-                yOffset += 2;
+                g.fillRect(distanceTravelled + xOffset, 15 + yOffset, PIXEL_SIZE, PIXEL_SIZE);
+                yOffset += PIXEL_SIZE;
             }
             yOffset = 0;
-            xOffset += 2;
+            xOffset += PIXEL_SIZE;
         }
 
         g.dispose();

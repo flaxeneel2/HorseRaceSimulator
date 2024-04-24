@@ -10,7 +10,7 @@ public class HorseData implements Serializable {
     private Color[][] sprite;
     private double confidence;
     private int racesWon;
-    private int timeOnTrack; // in ms
+    private int timeOnTrack; // in ticks
     private int totalDistanceTravelled; // in px
     private int racesLost;
     private double averageSpeed;

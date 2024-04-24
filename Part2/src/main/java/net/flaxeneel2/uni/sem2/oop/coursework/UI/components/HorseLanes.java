@@ -61,10 +61,17 @@ public class HorseLanes extends JPanel {
         }
     }
 
-    public void setHorse(Horse horse, int index) {
+    public void setHorse(HorseData horseData, int index) {
+        Horse horse = new Horse(this.getWidth(), horseData);
+        Random random = new Random();
+        Color trackColor = getSaveFile().laneColor;
+        if(getSaveFile().randomLaneColors) trackColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        horse.setBackground(trackColor);
+
         this.horses.set(index, horse);
-        ((Horse) this.getComponent(index)).setHorseData(horse.getHorseData());
-        this.getComponent(index).repaint();
+        this.remove(index);
+        this.add(horse, index);
+
         Main.UI_INSTANCE.getRaceStatus().updateLanes();
     }
 
