@@ -13,7 +13,6 @@ public class HorseData implements Serializable {
     private int timeOnTrack; // in ticks
     private int totalDistanceTravelled; // in px
     private int racesLost;
-    private double averageSpeed;
     public HorseData(String name, String breed, double confidence, Color[][] sprite) {
         super();
         this.name = name;
@@ -22,7 +21,12 @@ public class HorseData implements Serializable {
         this.sprite = sprite;
         this.racesWon = 0;
         this.racesLost = 0;
-        this.averageSpeed = 0;
+    }
+
+    public double getAverageSpeed() {
+        double distance = this.getTotalDistanceTravelled()/40_000.0; // convert px to m
+        double time = this.getTimeOnTrack()*0.00000462972222222222; // convert tick to hour (i got the multiplier from turning the tick time to hours)
+        return distance/time;
     }
 
     public int getTimeOnTrack() {
@@ -57,13 +61,6 @@ public class HorseData implements Serializable {
         this.racesLost = racesLost;
     }
 
-    public double getAverageSpeed() {
-        return averageSpeed;
-    }
-
-    public void setAverageSpeed(double averageSpeed) {
-        this.averageSpeed = averageSpeed;
-    }
 
     public String getName() {
         return name;

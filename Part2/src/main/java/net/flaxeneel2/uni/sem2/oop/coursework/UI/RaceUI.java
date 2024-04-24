@@ -134,6 +134,6 @@ public class RaceUI extends JFrame {
         this.settingsBar.disableAllComponents();
         this.lanes.readyAllHorses();
         executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(lanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(lanes::tickAllHorses, 0, 16667, TimeUnit.MICROSECONDS);
     }
 }

@@ -14,7 +14,7 @@ public class ViewHorseStats extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel informationPanel = new JPanel();
-        informationPanel.setLayout(new GridLayout(7, 2));
+        informationPanel.setLayout(new GridLayout(9, 2));
         informationPanel.setSize(new Dimension(this.getWidth(), this.getHeight()));
 
         informationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -38,7 +38,13 @@ public class ViewHorseStats extends JFrame {
         informationPanel.add(new JLabel(String.valueOf(horseData.getRacesWon())));
 
         informationPanel.add(new JLabel("Total distance travelled"));
-        informationPanel.add(new JLabel(String.valueOf(horseData.getTotalDistanceTravelled())));
+        informationPanel.add(new JLabel(horseData.getTotalDistanceTravelled()/40.0 + " meters."));
+
+        informationPanel.add(new JLabel("Total Time spent on track"));
+        informationPanel.add(new JLabel(horseData.getTimeOnTrack() + " ticks"));
+
+        informationPanel.add(new JLabel("Average speed"));
+        informationPanel.add(new JLabel(horseData.getAverageSpeed() + " km/h"));
 
 
         this.add(informationPanel, BorderLayout.CENTER);
