@@ -8,7 +8,6 @@ import java.awt.*;
 public class Winner extends JFrame {
     public Winner(Horse winnerHorse) {
         super("Race Over!");
-        System.out.println("Race Over!");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(5, 1));
         setSize(400, 200);
@@ -29,7 +28,6 @@ public class Winner extends JFrame {
         ok.addActionListener(e -> this.dispose());
         this.add(ok);
 
-        System.out.println("end");
 
         this.setVisible(true);
     }

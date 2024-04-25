@@ -121,7 +121,6 @@ public class RaceUI extends JFrame {
     public void stopRace() {
         executor.shutdown();
         this.settingsBar.enableAllComponents();
-        System.out.println("out");
         new Winner(this.raceStatus.getWinnerHorse());
     }
 

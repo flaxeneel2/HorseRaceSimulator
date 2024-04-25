@@ -18,6 +18,8 @@ public class SettingsBar extends JPanel {
 
     private final JButton startButton;
 
+    private JComboBox<Integer> laneDropdown;
+
     public SettingsBar() {
         super();
         Dimension panelDimensions = Main.UI_INSTANCE.getSize();
@@ -86,7 +88,7 @@ public class SettingsBar extends JPanel {
         panel.setLayout(new FlowLayout());
 
         panel.add(new JLabel("Number of lanes:   "));
-        JComboBox<Integer> laneDropdown = new JComboBox<>(new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
+        laneDropdown = new JComboBox<>(new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
         laneDropdown.addActionListener(e -> Main.UI_INSTANCE.getLanes().updateLanes(laneDropdown.getSelectedIndex()+2));
 
 
@@ -102,10 +104,12 @@ public class SettingsBar extends JPanel {
 
     public void disableAllComponents() {
         startButton.setText("Race ongoing...");
+        laneDropdown.setEnabled(false);
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
     }
     public void enableAllComponents() {
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
+        laneDropdown.setEnabled(true);
         startButton.setText("Start");
     }
 }
