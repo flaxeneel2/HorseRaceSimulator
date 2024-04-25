@@ -17,3 +17,9 @@ You can build the project using the following command:
 
 You can build the project using the following command:
 `mvn compile exec:java -pl Part2 -am`
+
+
+#### Known issues with part 2
+
+- More accurate horse odds do not populate on random horses until at least 3 runs have been done with the random horse.
+
