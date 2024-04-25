@@ -26,7 +26,7 @@ public class ViewHorseStats extends JFrame {
         informationPanel.add(new JLabel(horseData.getBreed()));
 
         informationPanel.add(new JLabel("Confidence"));
-        informationPanel.add(new JLabel(String.valueOf(horseData.getConfidence())));
+        informationPanel.add(new JLabel(String.format("%.3f", horseData.getConfidence())));
 
         informationPanel.add(new JLabel("Total number of races"));
         informationPanel.add(new JLabel(String.valueOf(horseData.getRacesLost() + horseData.getRacesWon())));
@@ -44,7 +44,7 @@ public class ViewHorseStats extends JFrame {
         informationPanel.add(new JLabel(horseData.getTimeOnTrack() + " ticks"));
 
         informationPanel.add(new JLabel("Average speed"));
-        informationPanel.add(new JLabel(horseData.getAverageSpeed() + " km/h"));
+        informationPanel.add(new JLabel(String.format("%.2f km/h", horseData.getAverageSpeed())));
 
 
         this.add(informationPanel, BorderLayout.CENTER);

@@ -50,12 +50,12 @@ public class HorseStatus extends JPanel {
 
             horseInfo.add(new JLabel("Name: " + horse.getHorseData().getName()));
 
-            JLabel confidence = new JLabel("Confidence: " + horse.getHorseData().getConfidence());
+            JLabel confidence = new JLabel(String.format("Confidence: %.3f", horse.getHorseData().getConfidence()));
             this.putClientProperty(horse.getHorseData().getName() + "-confidence", confidence);
             horseInfo.add(confidence);
 
             horseInfo.add(new JLabel("Breed: " + horse.getHorseData().getBreed()));
-            horseInfo.add(new JLabel("Odds: " + horse.getOdds()));
+            horseInfo.add(new JLabel(String.format("Odds: %.3f", horse.getOdds())));
             JPanel horseStatusRight = new JPanel();
             horseStatusRight.setLayout(new GridLayout(4, 1));
 
@@ -88,7 +88,7 @@ public class HorseStatus extends JPanel {
 
     public void updateConfidenceOfHorse(Horse horse) {
         JLabel confidence = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-confidence");
-        confidence.setText("Confidence: " + horse.getHorseData().getConfidence());
+        confidence.setText(String.format("Confidence: %.3f", horse.getHorseData().getConfidence()));
         numFinished++;
         if(numFinished == this.horses.size()) {
             Main.UI_INSTANCE.stopRace();

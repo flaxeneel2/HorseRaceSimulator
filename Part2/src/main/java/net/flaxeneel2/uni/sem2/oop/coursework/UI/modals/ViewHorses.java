@@ -57,7 +57,7 @@ public class ViewHorses extends JFrame {
         details.setLayout(new BoxLayout(details, BoxLayout.Y_AXIS));
         details.setBackground(new Color(54,54,54));
         details.add(new JLabel("Name: " + horse.getName()));
-        details.add(new JLabel("Confidence: " + horse.getConfidence()));
+        details.add(new JLabel(String.format("Confidence: %.3f", horse.getConfidence())));
         details.add(new JLabel("Breed: " + horse.getBreed()));
 
         horsePanel.add(details);
