@@ -26,15 +26,6 @@ public class HorseData implements Serializable {
         this.racesLost = 0;
     }
 
-    public double getOdds(ArrayList<Horse> horses) {
-        double averageSpeed = this.getAverageSpeed();
-        for(Horse horse : horses) {
-
-        }
-        //TODO: implement this
-        return 0;
-    }
-
     public double getAverageSpeed() {
         double distance = this.getTotalDistanceTravelled()/40_000.0; // convert px to m
         double time = this.getTimeOnTrack()*0.00000462972222222222; // convert tick to hour (i got the multiplier from turning the tick time to hours)

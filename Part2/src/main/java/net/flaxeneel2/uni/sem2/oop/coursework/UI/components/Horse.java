@@ -27,6 +27,8 @@ public class Horse extends Canvas  implements Cloneable{
 
     private boolean fallen;
 
+    private double odds;
+
     private HorseData horseData;
 
 
@@ -64,6 +66,14 @@ public class Horse extends Canvas  implements Cloneable{
         distanceTravelled = newOffset;
 
         this.paint(this.getGraphics());
+    }
+
+    public double getOdds() {
+        return odds;
+    }
+
+    public void setOdds(double odds) {
+        this.odds = odds;
     }
 
     public void fall() {
@@ -134,7 +144,7 @@ public class Horse extends Canvas  implements Cloneable{
         for (Color[] row : sprite) {
             if(row.length==0) continue;
             for (Color color : row) {
-
+                if(color == null) continue;
                 Color c = this.fallen && color.getAlpha() != 0 ? new Color(255, 0, 0) : color;
                 g.setColor(c);
                 g.fillRect(distanceTravelled + xOffset, ((this.getHeight())/3) + yOffset, PIXEL_SIZE, PIXEL_SIZE);

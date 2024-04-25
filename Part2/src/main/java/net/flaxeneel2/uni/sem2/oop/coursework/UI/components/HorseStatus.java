@@ -4,6 +4,7 @@ import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.Bet;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorseStats;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
+import net.flaxeneel2.uni.sem2.oop.coursework.util.OddsCalculator;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -41,6 +42,8 @@ public class HorseStatus extends JPanel {
         this.position = 1;
         this.winnerHorse = null;
 
+        OddsCalculator.calculateOdds(this.horses);
+
 
         for(Horse horse : this.horses) {
             JPanel horseStatus = new JPanel();
@@ -57,7 +60,7 @@ public class HorseStatus extends JPanel {
             horseInfo.add(confidence);
 
             horseInfo.add(new JLabel("Breed: " + horse.getHorseData().getBreed()));
-            horseInfo.add(new JLabel("Odds: " + 0.1));
+            horseInfo.add(new JLabel("Odds: " + horse.getOdds()));
             JPanel horseStatusRight = new JPanel();
             horseStatusRight.setLayout(new GridLayout(4, 1));
 
