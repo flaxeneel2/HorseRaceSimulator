@@ -19,4 +19,6 @@
         <module>Part1</module>
     </modules>
 
+    <packaging>pom</packaging>
+
 </project>
