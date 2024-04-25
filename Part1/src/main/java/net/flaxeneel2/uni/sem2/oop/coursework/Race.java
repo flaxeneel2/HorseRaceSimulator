@@ -244,6 +244,9 @@ public class Race
         
         //print the | for the end of the track
         System.out.print('|');
+
+        //stats readout
+        System.out.printf(" (Horse Name: %s ; Confidence: %.2f) ", theHorse.getName(), theHorse.getConfidence());
     }
         
     

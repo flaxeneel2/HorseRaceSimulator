@@ -20,10 +20,10 @@ public class Main {
      * Start a test race.
      */
     public static void testRace() {
-        Race race = new Race(3);
-        race.addHorse(new Horse('♕', "horse1", 1), 1);
+        Race race = new Race(20);
+        race.addHorse(new Horse('♕', "horse1", 0.5), 1);
         race.addHorse(new Horse('b', "horse2", 1), 2);
-        race.addHorse(new Horse('c', "horse3", 1), 3);
+        race.addHorse(new Horse('c', "horse3", 0.25), 3);
         race.startRace();
     }
 }
