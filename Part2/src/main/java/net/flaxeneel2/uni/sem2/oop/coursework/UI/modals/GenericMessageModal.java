@@ -22,7 +22,7 @@ public class GenericMessageModal extends JFrame {
     public void setMessages(ArrayList<String> messages) {
         this.getContentPane().removeAll();
         setLayout(new GridLayout(messages.size()+1, 1));
-        messages.forEach(message -> this.add(new JLabel(message)));
+        messages.forEach(message -> this.add(new JLabel("<html>" + message + "</html>")));
         addOkButton();
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
