@@ -19,11 +19,11 @@ public class CreateHorse extends JFrame {
 
     private JLabel errorMessage;
 
-    private String breed;
+    private final String breed;
 
     private String name;
 
-    private ViewHorses horseViewer;
+    private final ViewHorses horseViewer;
 
 
 
@@ -127,9 +127,7 @@ public class CreateHorse extends JFrame {
         cancelSaveButtonsContainer.setPreferredSize(new Dimension(this.getWidth(), 25));
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(e -> {
-            this.dispose();
-        });
+        cancelButton.addActionListener(e -> this.dispose());
         cancelButton.setBackground(new Color(124, 45, 45, 255));
 
         JButton saveButton = new JButton("Save");

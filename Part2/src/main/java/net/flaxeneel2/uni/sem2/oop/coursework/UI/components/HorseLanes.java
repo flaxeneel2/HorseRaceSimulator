@@ -11,7 +11,7 @@ import java.util.Random;
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class HorseLanes extends JPanel {
-    private ArrayList<Horse> horses;
+    private final ArrayList<Horse> horses;
     public HorseLanes() {
         super();
 

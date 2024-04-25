@@ -1,7 +1,5 @@
 package net.flaxeneel2.uni.sem2.oop.coursework;
 
-import javax.swing.*;
-
 /**
  * Write a description of class Horse here.
  * 

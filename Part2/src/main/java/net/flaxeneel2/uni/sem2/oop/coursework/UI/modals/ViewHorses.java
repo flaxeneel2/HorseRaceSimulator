@@ -1,7 +1,5 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
-import net.flaxeneel2.uni.sem2.oop.coursework.Main;
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
 import javax.swing.*;
@@ -13,7 +11,6 @@ import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class ViewHorses extends JFrame {
 
-    private JPanel horsesList;
 
     public ViewHorses() {
         this.setTitle("Saved Horses");
@@ -30,14 +27,10 @@ public class ViewHorses extends JFrame {
 
 
         JButton newHorse = new JButton("+ New Horse");
-        newHorse.addActionListener(e -> {
-            new CreateHorse(this);
-        });
+        newHorse.addActionListener(e -> new CreateHorse(this));
         newHorse.setBackground(Color.BLUE);
         newHorse.setAlignmentX(Component.RIGHT_ALIGNMENT);
         this.add(newHorse);
-
-        this.horsesList = new JPanel();
 
         this.addEntries(new ArrayList<>(Arrays.asList(getSaveFile().horses.getAllHorses())));
     }

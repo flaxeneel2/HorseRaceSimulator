@@ -16,6 +16,7 @@ public class IntegerFilter extends DocumentFilter {
         }
     }
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfStringBuilder")
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
         Document document = fb.getDocument();

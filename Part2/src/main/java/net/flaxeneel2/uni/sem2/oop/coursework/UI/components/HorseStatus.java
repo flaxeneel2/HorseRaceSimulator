@@ -3,16 +3,11 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.Bet;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorseStats;
-import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 import net.flaxeneel2.uni.sem2.oop.coursework.util.OddsCalculator;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class HorseStatus extends JPanel {
     private ArrayList<Horse> horses;
@@ -74,9 +69,7 @@ public class HorseStatus extends JPanel {
             horseStatusRight.add(status);
 
             JButton betButton = new JButton("Bet on this horse");
-            betButton.addActionListener(e -> {
-                new Bet(horse);
-            });
+            betButton.addActionListener(e -> new Bet(horse));
 
             horseStatusRight.add(betButton);
 

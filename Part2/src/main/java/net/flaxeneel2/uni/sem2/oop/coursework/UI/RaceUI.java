@@ -84,8 +84,6 @@ public class RaceUI extends JFrame {
 
         UIManager.put("ComboBox.background", new Color(34, 34, 34));
         UIManager.put("ComboBox.foreground", new Color(255, 255, 255));
-        //UIManager.put("ComboBox.selectionBackground", new Color(34, 34, 34));
-        //UIManager.put("ComboBox.selectionForeground", new Color(255, 255, 255));
 
         UIManager.put("Button.background", new Color(34, 34, 34));
         UIManager.put("Button.foreground", new Color(255, 255, 255));

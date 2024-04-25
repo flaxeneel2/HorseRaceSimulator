@@ -1,10 +1,7 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.storage;
 
-import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
-
 import java.awt.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class HorseData implements Serializable {
@@ -28,7 +25,7 @@ public class HorseData implements Serializable {
 
     public double getAverageSpeed() {
         double distance = this.getTotalDistanceTravelled()/40_000.0; // convert px to m
-        double time = this.getTimeOnTrack()*0.00000462972222222222; // convert tick to hour (i got the multiplier from turning the tick time to hours)
+        double time = this.getTimeOnTrack()*0.00000462972222222222; // convert tick to hour (I got the multiplier from turning the tick time to hours)
         return distance/time;
     }
 

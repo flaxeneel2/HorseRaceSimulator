@@ -16,7 +16,7 @@ import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class SettingsBar extends JPanel {
 
-    private JButton startButton;
+    private final JButton startButton;
 
     public SettingsBar() {
         super();
@@ -34,9 +34,7 @@ public class SettingsBar extends JPanel {
         this.add(resetButton);
 
         JButton viewHorses = new JButton("View horses");
-        viewHorses.addActionListener(e -> {
-            new ViewHorses();
-        });
+        viewHorses.addActionListener(e -> new ViewHorses());
         this.add(viewHorses);
 
         JButton saveButton = new JButton("Save");
@@ -74,9 +72,7 @@ public class SettingsBar extends JPanel {
         this.add(loadButton);
 
         JButton editDefaults = new JButton("Edit Defaults");
-        editDefaults.addActionListener(e -> {
-            new EditDefaults();
-        });
+        editDefaults.addActionListener(e -> new EditDefaults());
         this.add(editDefaults);
 
         this.setAlignmentX(Component.LEFT_ALIGNMENT);

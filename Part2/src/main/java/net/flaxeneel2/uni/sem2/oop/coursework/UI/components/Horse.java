@@ -3,23 +3,17 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 
 public class Horse extends Canvas  implements Cloneable{
     private int distanceTravelled;
-    private final int MULT_FACTOR = 7; //makes the race move faster or slower
 
-    private boolean finishBroadcasted = false;
+    private boolean finishBroadcast = false;
 
     private int amountBet;
 
@@ -44,20 +38,22 @@ public class Horse extends Canvas  implements Cloneable{
     }
 
     public void tick() {
-        if(this.hasFinished() && !this.finishBroadcasted) {
+        if(this.hasFinished() && !this.finishBroadcast) {
             Main.UI_INSTANCE.getRaceStatus().updatePositioningOfHorse(this);
             this.horseData.setConfidence(this.horseData.getConfidence() + 0.1);
             Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
             Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Finished");
-            this.finishBroadcasted = true;
+            this.finishBroadcast = true;
             this.amountBet = 0;
         }
 
         if(this.fallen || this.hasFinished()) return;
         this.tickFall();
         if(this.fallen) return;
-        int speed = (int) Math.round((new Random().nextDouble(0.5,1.5)*MULT_FACTOR)*(Math.log10(horseData.getConfidence()+0.2) + ((17- horseData.getConfidence())/10)));
-        int newOffset = (int) (distanceTravelled + speed);
+        //makes the race move faster or slower
+        int MULT_FACTOR = 7;
+        int speed = (int) Math.round((new Random().nextDouble(0.5,1.5)* MULT_FACTOR)*(Math.log10(horseData.getConfidence()+0.2) + ((17- horseData.getConfidence())/10)));
+        int newOffset = distanceTravelled + speed;
         if(newOffset < 0) {
             newOffset = 0;
         }
@@ -102,7 +98,7 @@ public class Horse extends Canvas  implements Cloneable{
 
         this.distanceTravelled = 0;
         this.fallen = false;
-        this.finishBroadcasted = false;
+        this.finishBroadcast = false;
         this.paint(this.getGraphics());
     }
 

@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Testarea extends JFrame {
-    private int pixelSize = 10;
+    private final int pixelSize = 10;
     private Color currentColor = Color.BLACK;
-    private JPanel canvas;
+    private final JPanel canvas;
 
     public Testarea() {
         setTitle("Draw your horse");

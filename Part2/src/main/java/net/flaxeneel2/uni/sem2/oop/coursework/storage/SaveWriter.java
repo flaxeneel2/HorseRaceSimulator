@@ -1,6 +1,5 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.storage;
 
-import javax.swing.*;
 import java.io.*;
 
 public class SaveWriter {
