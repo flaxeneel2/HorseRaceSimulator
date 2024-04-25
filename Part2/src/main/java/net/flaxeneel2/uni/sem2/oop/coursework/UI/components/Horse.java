@@ -3,14 +3,19 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 
-public class Horse extends Canvas {
+public class Horse extends Canvas  implements Cloneable{
     private int distanceTravelled;
     private final int MULT_FACTOR = 7; //makes the race move faster or slower
 
@@ -43,6 +48,7 @@ public class Horse extends Canvas {
             Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
             Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Finished");
             this.finishBroadcasted = true;
+            this.amountBet = 0;
         }
 
         if(this.fallen || this.hasFinished()) return;
@@ -62,6 +68,7 @@ public class Horse extends Canvas {
 
     public void fall() {
         this.fallen = true;
+        this.amountBet = 0;
         Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Fallen");
         horseData.setConfidence(horseData.getConfidence()-0.1);
         Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
@@ -86,7 +93,6 @@ public class Horse extends Canvas {
         this.distanceTravelled = 0;
         this.fallen = false;
         this.finishBroadcasted = false;
-        this.amountBet = 0;
         this.paint(this.getGraphics());
     }
 
@@ -141,6 +147,18 @@ public class Horse extends Canvas {
         g.dispose();
 
         bufferStrategy.show();
+    }
 
+    public int getAmountBet() {
+        return amountBet;
+    }
+
+    @Override
+    public Horse clone() {
+        try {
+            return (Horse) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

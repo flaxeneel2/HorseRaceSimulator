@@ -3,6 +3,7 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.HorseLanes;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.HorseStatus;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.SettingsBar;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.Winner;
 
 import javax.swing.*;
 import java.awt.*;
@@ -122,6 +123,7 @@ public class RaceUI extends JFrame {
     public void stopRace() {
         executor.shutdown();
         this.settingsBar.enableAllComponents();
+        new Winner(this.raceStatus.getWinnerHorse());
     }
 
     public void resetRace() {
@@ -132,6 +134,7 @@ public class RaceUI extends JFrame {
 
     public void startRace() {
         this.settingsBar.disableAllComponents();
+        this.raceStatus.updateLanes();
         this.lanes.readyAllHorses();
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(lanes::tickAllHorses, 0, 16667, TimeUnit.MICROSECONDS);

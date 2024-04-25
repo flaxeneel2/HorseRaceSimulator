@@ -17,7 +17,7 @@ public class HorseStatus extends JPanel {
     private ArrayList<Horse> horses;
     private int position = 1;
     private int numFinished = 0;
-
+    private Horse winnerHorse = null;
     public HorseStatus() {
 
         super();
@@ -39,6 +39,7 @@ public class HorseStatus extends JPanel {
         this.removeAll();
 
         this.position = 1;
+        this.winnerHorse = null;
 
 
         for(Horse horse : this.horses) {
@@ -102,7 +103,10 @@ public class HorseStatus extends JPanel {
     public void updatePositioningOfHorse(Horse horse) {
         JLabel positioning = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-positioning");
         positioning.setText("Position: " + this.position);
-        if(position == 1) horse.getHorseData().setRacesWon(horse.getHorseData().getRacesWon()+1);
+        if(position == 1) {
+            winnerHorse = horse.clone();
+            horse.getHorseData().setRacesWon(horse.getHorseData().getRacesWon()+1);
+        }
         else horse.getHorseData().setRacesLost(horse.getHorseData().getRacesLost()+1);
         switch (position) {
             case 1:
@@ -119,6 +123,10 @@ public class HorseStatus extends JPanel {
                 break;
         }
         position++;
+    }
+
+    public Horse getWinnerHorse() {
+        return winnerHorse;
     }
 
     public void updateStatusOfHorse(Horse horse, String status) {
