@@ -74,6 +74,16 @@ public class ViewHorses extends JFrame {
         useHorse.addActionListener(e -> new UseHorse(horse));
 
         JButton deleteHorse = new JButton("Delete Horse");
+
+        deleteHorse.setBackground(new Color(124, 45, 45, 255));
+
+        deleteHorse.addActionListener(e -> {
+            getSaveFile().horses.removeHorse(horse.getName());
+            this.remove(horsePanel);
+            this.revalidate();
+            this.repaint();
+        });
+
         JButton viewHorseStats = new JButton("View Horse Stats");
 
         viewHorseStats.addActionListener(e -> new ViewHorseStats(horse));
