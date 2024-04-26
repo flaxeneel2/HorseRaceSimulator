@@ -38,8 +38,8 @@ public class SpritesDrawer extends JFrame {
                             pixelsDrawn[extX][extY] = new Color(255,255,255, 0);
                             g.setColor(Color.WHITE);
                         } else {
-                            if(pixelsDrawn[x][y].getRGB() == new Color(255,255,255,0).getRGB()) g.setColor(Color.WHITE);
-                            else g.setColor(pixelsDrawn[x][y]);
+                            if(pixelsDrawn[extX][extY] == null || pixelsDrawn[extX][extY].getRGB() == new Color(255,255,255,0).getRGB()) g.setColor(Color.WHITE);
+                            else g.setColor(pixelsDrawn[extX][extY]);
                         }
                         g.fillRect(x, y, pixelSize, pixelSize);
                         g.setColor(Color.BLACK);

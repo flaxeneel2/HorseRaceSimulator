@@ -23,7 +23,7 @@ public class RaceUI extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Horse simulator");
-        this.setSize(new Dimension(800, 600));
+        this.setSize(new Dimension(1200, 600));
         this.setMinimumSize(new Dimension(800, 600));
 
 
