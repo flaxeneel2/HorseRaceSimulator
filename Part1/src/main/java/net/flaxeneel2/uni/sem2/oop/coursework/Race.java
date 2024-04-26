@@ -170,7 +170,6 @@ public class Race
         
         printLane(lane1Horse);
         if(raceWonBy(lane1Horse)) {
-            System.out.print("  <-- Finished");
             horsesThatWon.add(lane1Horse);
         }
 
@@ -178,21 +177,18 @@ public class Race
         
         printLane(lane2Horse);
         if(raceWonBy(lane2Horse)) {
-            System.out.print("  <-- Finished");
             horsesThatWon.add(lane2Horse);
         }
         System.out.println();
         
         printLane(lane3Horse);
         if(raceWonBy(lane3Horse)) {
-            System.out.print("  <-- Finished ");
             horsesThatWon.add(lane3Horse);
         }
         System.out.println();
 
         
         multiplePrint('=',raceLength+3); //bottom edge of track
-
 
         if(horsesThatWon.size() > 1) {
             StringBuilder horsesWonMessage = new StringBuilder();
@@ -221,6 +217,9 @@ public class Race
         //and after the horse
         int spacesBefore = theHorse.getDistanceTravelled();
         int spacesAfter = raceLength - theHorse.getDistanceTravelled();
+        if(raceWonBy(theHorse)) {
+            theHorse.setConfidence(theHorse.getConfidence()+0.1);
+        }
         
         //print a | for the beginning of the lane
         System.out.print('|');
@@ -246,7 +245,11 @@ public class Race
         System.out.print('|');
 
         //stats readout
-        System.out.printf(" (Horse Name: %s ; Confidence: %.2f) ", theHorse.getName(), theHorse.getConfidence());
+        System.out.printf("\t(Horse Name: %s ; Confidence: %.2f) ", theHorse.getName(), theHorse.getConfidence());
+
+        if(raceWonBy(theHorse)) {
+            System.out.print("\t\t<-- Finished");
+        }
     }
         
     
