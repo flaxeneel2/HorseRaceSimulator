@@ -17,8 +17,6 @@ public class CreateHorse extends JFrame {
 
     private double confidence;
 
-    private JLabel errorMessage;
-
     private final String breed;
 
     private String name;
@@ -132,6 +130,18 @@ public class CreateHorse extends JFrame {
 
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
+            if(name == null || name.isEmpty()) {
+                GenericMessageModal errorModal = new GenericMessageModal("Enter a valid name!");
+                errorModal.setMessages("Invalid name for your horse! the horse can't have an empty name!");
+                errorModal.makeVisibile();
+                return;
+            }
+            if(!this.editButton.isEnabled()) {
+                GenericMessageModal errorModal = new GenericMessageModal("Draw the horse!");
+                errorModal.setMessages("Your horse cannot be blank!");
+                errorModal.makeVisibile();
+                return;
+            }
             this.saveHorseToStore();
             this.dispose();
         });

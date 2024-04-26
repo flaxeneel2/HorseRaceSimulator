@@ -9,7 +9,6 @@ Part 2 is the GUI version made using java swing.
 ## Requirements
 - Java 17
 - Maven (Tested with 3.9.6)
-- 
 
 
 ## Running the program
@@ -37,4 +36,3 @@ mvn compile exec:java -pl Part2 -am
 
 - More accurate horse odds do not populate on random horses until at least 3 runs have been done with the random horse.
 - Light scroll bar thumbs. This seems to be a limitation with recent java swing UIManager as it no longer follows the behaviour as the official documentation would suggest.
-- 
