@@ -64,6 +64,7 @@ public class Bet extends JFrame {
             int amount = Integer.parseInt(amountInput.getText());
             horse.addToBet(amount);
             Main.getSaveFile().balance-=amount;
+            Main.UI_INSTANCE.updateBalance();
             this.dispose();
         });
 

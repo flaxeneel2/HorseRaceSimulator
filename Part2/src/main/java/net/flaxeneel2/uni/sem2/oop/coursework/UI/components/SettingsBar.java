@@ -69,6 +69,7 @@ public class SettingsBar extends JPanel {
                 SaveFile save = SaveWriter.load(file);
                 if(save != null) {
                     Main.setSaveFile(save);
+                    Main.UI_INSTANCE.updateBalance();
                 } else {
                     System.out.println("Was null!");
                 }

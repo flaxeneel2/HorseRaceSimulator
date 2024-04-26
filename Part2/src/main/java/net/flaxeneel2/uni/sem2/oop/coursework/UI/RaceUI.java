@@ -34,6 +34,10 @@ public class RaceUI extends JFrame {
         this.setThemingDefaults();
     }
 
+    public void updateBalance() {
+        this.settingsBar.updateBalance();
+    }
+
     public void initialise() {
 
         this.settingsBar = new SettingsBar();
@@ -121,17 +125,20 @@ public class RaceUI extends JFrame {
     public void stopRace() {
         executor.shutdown();
         this.settingsBar.enableAllComponents();
+        this.updateBalance();
         new Winner(this.raceStatus.getWinnerHorse());
     }
 
     public void resetRace() {
         this.lanes.readyAllHorses();
         this.settingsBar.enableAllComponents();
+        this.updateBalance();
         this.raceStatus.updateLanes();
     }
 
     public void startRace() {
         this.settingsBar.disableAllComponents();
+        this.updateBalance();
         this.raceStatus.updateLanes();
         this.lanes.readyAllHorses();
         executor = Executors.newSingleThreadScheduledExecutor();

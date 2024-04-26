@@ -39,8 +39,12 @@ public class Horse extends Canvas  implements Cloneable{
 
     public void tick() {
         if(this.hasFinished() && !this.finishBroadcast) {
-            Main.UI_INSTANCE.getRaceStatus().updatePositioningOfHorse(this);
-            this.horseData.setConfidence(this.horseData.getConfidence() + 0.1);
+            int position = Main.UI_INSTANCE.getRaceStatus().updatePositioningOfHorse(this);
+            if(position == 1 ) {
+                this.horseData.setConfidence(this.horseData.getConfidence() + 0.1);
+                getSaveFile().balance+= (int) ((2 - this.getOdds())*this.amountBet);
+                Main.UI_INSTANCE.updateBalance();
+            }
             Main.UI_INSTANCE.getRaceStatus().updateConfidenceOfHorse(this);
             Main.UI_INSTANCE.getRaceStatus().updateStatusOfHorse(this, "Finished");
             this.finishBroadcast = true;
@@ -97,6 +101,7 @@ public class Horse extends Canvas  implements Cloneable{
     public void getReady() {
 
         this.distanceTravelled = 0;
+        System.out.println("odds: " + this.getOdds());
         this.fallen = false;
         this.finishBroadcast = false;
         this.paint(this.getGraphics());

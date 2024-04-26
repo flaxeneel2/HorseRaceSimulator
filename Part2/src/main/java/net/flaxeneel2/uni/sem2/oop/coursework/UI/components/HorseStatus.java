@@ -96,7 +96,7 @@ public class HorseStatus extends JPanel {
         }
     }
 
-    public void updatePositioningOfHorse(Horse horse) {
+    public int updatePositioningOfHorse(Horse horse) {
         JLabel positioning = (JLabel) this.getClientProperty(horse.getHorseData().getName() + "-positioning");
         positioning.setText("Position: " + this.position);
         if(position == 1) {
@@ -118,7 +118,7 @@ public class HorseStatus extends JPanel {
                 positioning.setForeground(new Color(255, 255, 255, 128));
                 break;
         }
-        position++;
+        return position++;
     }
 
     public Horse getWinnerHorse() {
