@@ -7,6 +7,10 @@ public class Main {
     public static RaceUI UI_INSTANCE;
     private static SaveFile SAVE_FILE;
     public static void main(String[] args) {
+        startRaceGUI();
+    }
+
+    public static void startRaceGUI() {
         UI_INSTANCE = new RaceUI();
         setSaveFile(new SaveFile());
         UI_INSTANCE.initialise();
