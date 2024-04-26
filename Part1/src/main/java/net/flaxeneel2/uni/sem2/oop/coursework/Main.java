@@ -22,7 +22,7 @@ public class Main {
     public static void testRace() {
         Race race = new Race(20);
         race.addHorse(new Horse('♕', "horse1", 0.5), 1);
-        race.addHorse(new Horse('b', "horse2", 1), 2);
+        race.addHorse(new Horse('b', "horse2", 0.9), 2);
         race.addHorse(new Horse('c', "horse3", 0.25), 3);
         race.startRace();
     }

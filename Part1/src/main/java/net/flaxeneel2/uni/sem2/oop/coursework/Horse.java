@@ -34,6 +34,7 @@ public class Horse
     public void fall()
     {
         this.setFallen(true);
+        this.confidence-=0.1;
     }
 
     public int getDistanceTravelled() {
