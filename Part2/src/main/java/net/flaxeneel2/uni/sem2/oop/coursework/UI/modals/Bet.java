@@ -17,7 +17,7 @@ public class Bet extends JFrame {
         this.setLayout(new GridLayout(2, 1));
         this.setSize(400, 200);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        this.setLocationRelativeTo(null);
         JPanel betPanel = new JPanel();
         betPanel.setLayout(new FlowLayout());
         betPanel.setPreferredSize(new Dimension(this.getWidth(), 25));

@@ -18,6 +18,7 @@ public class SpritesDrawer extends JFrame {
         setTitle("Draw your horse");
         setSize(416, 476);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(parentFrame);
         setResizable(false);
 
         pixelsDrawn = canvasState;
@@ -76,6 +77,13 @@ public class SpritesDrawer extends JFrame {
         controlPanel.add(clearButton);
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
+            if(isCanvasEmpty()) {
+                GenericMessageModal modal = new GenericMessageModal("Draw the horse!");
+                modal.setMessages("Your horse cannot be blank!");
+                modal.setLocationRelativeTo(parentFrame);
+                modal.makeVisibile();
+                return;
+            }
             parentFrame.setSprite(this.pixelsDrawn);
             this.dispose();
         });
@@ -87,6 +95,15 @@ public class SpritesDrawer extends JFrame {
         add(controlPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    public boolean isCanvasEmpty() {
+        for(Color[] row : pixelsDrawn) {
+            for(Color c : row) {
+                if(c != null && c.getAlpha() != 0) return false;
+            }
+        }
+        return true;
     }
 
     private void drawPixel(MouseEvent e) {

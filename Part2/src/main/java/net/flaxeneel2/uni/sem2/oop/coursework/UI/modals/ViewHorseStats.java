@@ -9,7 +9,7 @@ public class ViewHorseStats extends JFrame {
     public ViewHorseStats(HorseData horseData) {
         super("View Horse Stats");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        this.setLocationRelativeTo(null);
         setSize(new Dimension(416, 600));
         setLayout(new BorderLayout());
 

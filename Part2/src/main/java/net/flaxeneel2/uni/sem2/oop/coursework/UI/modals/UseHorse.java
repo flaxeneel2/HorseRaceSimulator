@@ -15,7 +15,7 @@ public class UseHorse extends JFrame {
         this.setLayout(new FlowLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
-
+        this.setLocationRelativeTo(null);
         this.add(new JLabel("Select the lane for the horse"));
 
         JPanel selector = new JPanel();

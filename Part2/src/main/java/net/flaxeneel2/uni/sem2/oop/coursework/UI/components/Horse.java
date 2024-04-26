@@ -108,7 +108,7 @@ public class Horse extends Canvas  implements Cloneable{
 
     private void tickFall() {
         double confidence = horseData.getConfidence();
-        double chance = ((Math.pow(Math.E, (2*confidence - 1.25)) - 0.54 - ((2*confidence))/5 + (1/Math.E))/1.93)/45.0;
+        double chance = ((Math.pow(Math.E, (2*confidence - 1.25)) - 0.54 - ((2*confidence))/5 + (1/Math.E))/1.93)/40.0;
         if(new Random().nextInt(100) > (1-chance)*100) {
             this.fall();
         }

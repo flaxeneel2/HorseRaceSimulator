@@ -15,7 +15,7 @@ public class EditDefaults extends JFrame {
         super("Edit Defaults");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(new Dimension(800, 600));
-
+        this.setLocationRelativeTo(null);
         FlowLayout layout = new FlowLayout();
         layout.setVgap(10);
         this.setLayout(layout);

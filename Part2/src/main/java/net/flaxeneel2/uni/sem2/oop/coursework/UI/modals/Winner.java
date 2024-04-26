@@ -9,6 +9,7 @@ public class Winner extends JFrame {
     public Winner(Horse winnerHorse) {
         super("Race Over!");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         setLayout(new GridLayout(5, 1));
         setSize(400, 200);
         if(winnerHorse != null) {
