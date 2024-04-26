@@ -1,5 +1,6 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.components.Horse;
 import net.flaxeneel2.uni.sem2.oop.coursework.util.IntegerFilter;
 
@@ -23,7 +24,7 @@ public class Bet extends JFrame {
         betPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 25, 5));
         JTextField amountInput = new JTextField();
 
-        ((PlainDocument) amountInput.getDocument()).setDocumentFilter(new IntegerFilter());
+        ((PlainDocument) amountInput.getDocument()).setDocumentFilter(new IntegerFilter(0, Main.getSaveFile().balance));
 
         JButton ok = new JButton("OK");
 
@@ -60,8 +61,9 @@ public class Bet extends JFrame {
 
 
         ok.addActionListener(e -> {
-            //Main.UI_INSTANCE.getLanes().setHorse(horse, selectedLane-1);
-            horse.addToBet(Integer.parseInt(amountInput.getText()));
+            int amount = Integer.parseInt(amountInput.getText());
+            horse.addToBet(amount);
+            Main.getSaveFile().balance-=amount;
             this.dispose();
         });
 

@@ -22,6 +22,8 @@ public class SettingsBar extends JPanel {
 
     private JComboBox<Integer> trackLengthDropdown;
 
+    private JLabel balance;
+
     public SettingsBar() {
         super();
         Dimension panelDimensions = Main.UI_INSTANCE.getSize();
@@ -80,6 +82,10 @@ public class SettingsBar extends JPanel {
         editDefaults.addActionListener(e -> new EditDefaults());
         this.add(editDefaults);
 
+        balance = new JLabel("Balance: $" + getSaveFile().balance);
+
+        this.add(balance);
+
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -101,6 +107,10 @@ public class SettingsBar extends JPanel {
         laneDropdown.setEditable(false);
         panel.add(laneDropdown);
         return panel;
+    }
+
+    public void updateBalance() {
+        balance.setText(String.format("Balance: $%s", getSaveFile().balance));
     }
 
     private JPanel getTrackLengthDropdown() {
