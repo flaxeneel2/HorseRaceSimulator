@@ -9,9 +9,21 @@ public class Main {
 
 
     public static void testEncapsulation() {
+        /*
+        This code will error:
+
+        System.out.println(horse.name);
+        System.out.println(horse.confidence);
+        System.out.println(horse.symbol);
+        horse.name = "Horse 1";
+        horse.confidence = 0.4;
+        horse.symbol = 'b'
+
+        This code does not error:
+         */
         Horse horse = new Horse('a', "horse1", 0.5);
         horse.setName("b");
-        horse.setConfidence(0);
+        horse.setConfidence(0.4);
         horse.setSymbol('b');
         System.out.println(horse.getName());
     }
