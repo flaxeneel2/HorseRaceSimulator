@@ -51,14 +51,14 @@ public class Horse extends Canvas  implements Cloneable{
         this.tickFall();
         if(this.fallen) return;
         //makes the race move faster or slower
-        int MULT_FACTOR = 7;
+        int MULT_FACTOR = 8/Main.UI_INSTANCE.getLanes().getLengthMultiplier();
         int speed = (int) Math.round((new Random().nextDouble(0.5,1.5)* MULT_FACTOR)*(Math.log10(horseData.getConfidence()+0.2) + ((17- horseData.getConfidence())/10)));
         int newOffset = distanceTravelled + speed;
         if(newOffset < 0) {
             newOffset = 0;
         }
         this.horseData.setTimeOnTrack(this.horseData.getTimeOnTrack() + 1);
-        this.horseData.setTotalDistanceTravelled(this.horseData.getTotalDistanceTravelled() + speed);
+        this.horseData.setTotalDistanceTravelled(this.horseData.getTotalDistanceTravelled() + (speed * Main.UI_INSTANCE.getLanes().getLengthMultiplier()));
         distanceTravelled = newOffset;
 
         this.paint(this.getGraphics());

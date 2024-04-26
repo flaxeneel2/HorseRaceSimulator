@@ -20,11 +20,14 @@ public class SettingsBar extends JPanel {
 
     private JComboBox<Integer> laneDropdown;
 
+    private JComboBox<Integer> trackLengthDropdown;
+
     public SettingsBar() {
         super();
         Dimension panelDimensions = Main.UI_INSTANCE.getSize();
         this.setSize(new Dimension(panelDimensions.width, 50));
         this.add(this.getLaneDropdown());
+        this.add(this.getTrackLengthDropdown());
 
         this.startButton = new JButton("Start");
         startButton.addActionListener(e -> Main.UI_INSTANCE.startRace());
@@ -100,16 +103,35 @@ public class SettingsBar extends JPanel {
         return panel;
     }
 
+    private JPanel getTrackLengthDropdown() {
+        JPanel panel = new JPanel();
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.setLayout(new FlowLayout());
+
+        panel.add(new JLabel("Length of track (multiple of window size * 0.8):   "));
+        trackLengthDropdown = new JComboBox<>(new Integer[]{1, 2, 4});
+        trackLengthDropdown.addActionListener(e -> Main.UI_INSTANCE.getLanes().updateLengthMultiplier((int) Math.pow(2, trackLengthDropdown.getSelectedIndex())));
+
+        trackLengthDropdown.setSize((int) (Main.UI_INSTANCE.getSize().width*0.3), panel.getHeight());
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+        trackLengthDropdown.setEditable(false);
+        panel.add(trackLengthDropdown);
+        return panel;
+    }
+
 
 
     public void disableAllComponents() {
         startButton.setText("Race ongoing...");
         laneDropdown.setEnabled(false);
+        trackLengthDropdown.setEnabled(false);
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
     }
     public void enableAllComponents() {
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
         laneDropdown.setEnabled(true);
+        trackLengthDropdown.setEnabled(true);
         startButton.setText("Start");
     }
 }

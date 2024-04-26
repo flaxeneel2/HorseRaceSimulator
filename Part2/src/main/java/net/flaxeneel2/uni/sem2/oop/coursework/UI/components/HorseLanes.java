@@ -12,6 +12,7 @@ import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
 
 public class HorseLanes extends JPanel {
     private final ArrayList<Horse> horses;
+    private int lengthMultiplier = 1;
     public HorseLanes() {
         super();
 
@@ -21,6 +22,14 @@ public class HorseLanes extends JPanel {
         this.setBackground(new Color(255, 255, 0));
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    }
+
+    public void updateLengthMultiplier(int num) {
+        lengthMultiplier = num;
+    }
+
+    public int getLengthMultiplier() {
+        return lengthMultiplier;
     }
 
     public void updateLanes(int numLanes) {
