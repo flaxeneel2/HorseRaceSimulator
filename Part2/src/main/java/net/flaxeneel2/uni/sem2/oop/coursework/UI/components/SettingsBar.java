@@ -70,6 +70,8 @@ public class SettingsBar extends JPanel {
                 if(save != null) {
                     Main.setSaveFile(save);
                     Main.UI_INSTANCE.updateBalance();
+                    Main.UI_INSTANCE.resetRace();
+                    Main.UI_INSTANCE.getLanes().repaintAllLanes();
                 } else {
                     System.out.println("Was null!");
                 }
@@ -99,6 +101,7 @@ public class SettingsBar extends JPanel {
 
         panel.add(new JLabel("Number of lanes:   "));
         laneDropdown = new JComboBox<>(new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
+        laneDropdown.setSelectedIndex(1);
         laneDropdown.addActionListener(e -> Main.UI_INSTANCE.getLanes().updateLanes(laneDropdown.getSelectedIndex()+2));
 
 

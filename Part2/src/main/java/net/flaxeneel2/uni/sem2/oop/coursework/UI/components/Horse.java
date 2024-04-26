@@ -101,7 +101,6 @@ public class Horse extends Canvas  implements Cloneable{
     public void getReady() {
 
         this.distanceTravelled = 0;
-        System.out.println("odds: " + this.getOdds());
         this.fallen = false;
         this.finishBroadcast = false;
         this.paint(this.getGraphics());

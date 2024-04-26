@@ -1,5 +1,6 @@
 package net.flaxeneel2.uni.sem2.oop.coursework.UI.modals;
 
+import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveFile;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class EditDefaults extends JFrame {
 
         AtomicReference<Color> trackColor = new AtomicReference<>(getSaveFile().laneColor);
 
-        //colorButton.addActionListener(e -> currentColor = JColorChooser.showDialog(null, "Choose Color", currentColor));
+
         colorChooserButton.addActionListener(e -> {
             trackColor.set(JColorChooser.showDialog(this, "Choose Color", trackColor.get()));
             trackColorSelection.setBorder(BorderFactory.createLineBorder(trackColor.get()));
@@ -85,6 +86,8 @@ public class EditDefaults extends JFrame {
             save.laneBorderColor = trackBorderColor.get();
             save.randomLaneColors = randomColor.isSelected();
             setSaveFile(save);
+            Main.UI_INSTANCE.resetRace();
+            Main.UI_INSTANCE.getLanes().repaintAllLanes();
             this.dispose();
         });
         saveButton.setBackground(new Color(0, 84, 0, 255));

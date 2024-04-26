@@ -6,6 +6,7 @@ import net.flaxeneel2.uni.sem2.oop.coursework.storage.HorseData;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import static net.flaxeneel2.uni.sem2.oop.coursework.Main.getSaveFile;
@@ -68,6 +69,16 @@ public class HorseLanes extends JPanel {
             horse.setLimit(this.getWidth());
             horse.getReady();
         }
+    }
+
+    public void repaintAllLanes() {
+        Arrays.stream(this.getComponents()).forEach(c -> {
+            Color color = getSaveFile().laneColor;
+            Random random = new Random();
+            if(getSaveFile().randomLaneColors) color = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            c.setBackground(color);
+            c.paint(c.getGraphics());
+        });
     }
 
     public void setHorse(HorseData horseData, int index) {
