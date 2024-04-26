@@ -4,7 +4,7 @@ package net.flaxeneel2.uni.sem2.oop.coursework;
 public class Main {
     
     public static void main(String[] args) {
-        testRace();
+        startRace();
     }
 
 
@@ -31,7 +31,7 @@ public class Main {
     /**
      * Start a test race.
      */
-    public static void testRace() {
+    public static void startRace() {
         Race race = new Race(20);
         race.addHorse(new Horse('♕', "horse1", 0.5), 1);
         race.addHorse(new Horse('b', "horse2", 0.9), 2);
