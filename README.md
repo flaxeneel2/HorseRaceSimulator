@@ -32,6 +32,10 @@ mvn compile exec:java -pl Part2 -am
 ```
 
 
+#### Ideal running conditions
+- full screen for all 10 lanes
+- 1440p screen or larger
+
 #### Known issues with part 2
 
 - More accurate horse odds do not populate on random horses until at least 3 runs have been done with the random horse.
