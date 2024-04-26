@@ -47,13 +47,7 @@ public class RaceUI extends JFrame {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                System.out.printf("Resizing components. \tHeight:%s\tWidth:%s\n", RaceUI.super.getHeight(), RaceUI.super.getWidth());
-                lanes.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
-                raceStatus.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
-                lanes.revalidate();
-                lanes.repaint();
-                raceStatus.revalidate();
-                raceStatus.repaint();
+                dealWithSizeChange();
             }
         });
 
@@ -64,11 +58,23 @@ public class RaceUI extends JFrame {
         this.raceStatus = new HorseStatus();
         this.add(this.raceStatus, BorderLayout.EAST);
 
+        SwingUtilities.invokeLater(this::dealWithSizeChange);
+
 
         this.lanes.updateLanes(3);
 
         this.setVisible(true);
 
+    }
+
+    public void dealWithSizeChange() {
+        System.out.printf("Resizing components. \tWidth:%s\tHeight:%s\n", RaceUI.super.getWidth(), RaceUI.super.getHeight());
+        lanes.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+        raceStatus.dealWithSizeChange(RaceUI.super.getWidth(), RaceUI.super.getHeight());
+        lanes.revalidate();
+        lanes.repaint();
+        raceStatus.revalidate();
+        raceStatus.repaint();
     }
 
     public HorseLanes getLanes() {

@@ -2,6 +2,7 @@ package net.flaxeneel2.uni.sem2.oop.coursework.UI.components;
 
 import net.flaxeneel2.uni.sem2.oop.coursework.Main;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.EditDefaults;
+import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.GenericMessageModal;
 import net.flaxeneel2.uni.sem2.oop.coursework.UI.modals.ViewHorses;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveFile;
 import net.flaxeneel2.uni.sem2.oop.coursework.storage.SaveWriter;
@@ -102,7 +103,16 @@ public class SettingsBar extends JPanel {
         panel.add(new JLabel("Number of lanes:   "));
         laneDropdown = new JComboBox<>(new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
         laneDropdown.setSelectedIndex(1);
-        laneDropdown.addActionListener(e -> Main.UI_INSTANCE.getLanes().updateLanes(laneDropdown.getSelectedIndex()+2));
+        laneDropdown.addActionListener(e -> {
+            int laneSelect = laneDropdown.getSelectedIndex()+2;
+
+            if(laneSelect >= 5 && Main.UI_INSTANCE.getHeight() < 700+((laneSelect-5)*125)) {
+                GenericMessageModal modal = new GenericMessageModal("Please increase your window size!");
+                modal.setMessages(String.format("Recommended size for %s lanes is 1200x%s", laneSelect, 700+((laneSelect-5)*125)));
+                modal.makeVisibile();
+            }
+            Main.UI_INSTANCE.getLanes().updateLanes(laneSelect);
+        });
 
 
         laneDropdown.setSize((int) (Main.UI_INSTANCE.getSize().width*0.2), panel.getHeight());
