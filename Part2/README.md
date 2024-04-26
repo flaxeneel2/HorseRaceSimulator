@@ -1,6 +1,6 @@
 # Part 2
 
-This is the UI code
+This is the UI code. Looking for the main readme? check one directory above
 
 ## Instructions
 These instructions assume you have already git cloned the repo and are in the same directory as this readme file.
