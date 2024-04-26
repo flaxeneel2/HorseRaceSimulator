@@ -6,6 +6,12 @@ Part 1 is the start of the program as a text-only program, without features such
 
 Part 2 is the GUI version made using java swing.
 
+
+## Contributors
+- McFarewell (Parts of Part 1)
+- Siddhant Misra (Parts of Part 1 and the entirety of Part 2)
+
+
 ## Requirements
 - Java 17
 - [Maven](https://maven.apache.org/download.cgi) (Tested with 3.9.6)
